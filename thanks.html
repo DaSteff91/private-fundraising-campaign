@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Sam's Workshop — Danke</title>
+    <meta
+      name="description"
+      content="Danke für die Unterstützung für Sams Werkstatt."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="%SITE_URL%/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:title" content="Sam's Workshop — Danke" />
+    <meta
+      property="og:description"
+      content="Danke für die Unterstützung für Sams Werkstatt."
+    />
+    <meta property="og:image" content="%SITE_URL%/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body class="page-thanks">
+    <a class="skip" href="#main">Zum Inhalt</a>
+    <header class="top">
+      <nav class="langs" aria-label="Language">
+        <a href="?lang=de" data-lang="de" aria-current="page">DE</a>
+        <a href="?lang=en" data-lang="en">EN</a>
+        <a href="?lang=pt" data-lang="pt">PT</a>
+        <a href="?lang=es" data-lang="es">ES</a>
+      </nav>
+    </header>
+
+    <main id="main" class="thanks">
+      <section class="thanks-hero">
+        <p class="thanks-brand">%CAMPAIGN_NAME%</p>
+        <h1 data-i18n="thanks.title">DANKE</h1>
+        <p class="lead" data-i18n="thanks.lead">
+          Die Sammlung ist abgeschlossen. Gemeinsam ist ein Betrag zusammengekommen,
+          der weitergeleitet wurde.
+        </p>
+
+        <div class="thanks-numbers" aria-live="polite">
+          <div class="thanks-figure">
+            <strong id="collected-eur">0 €</strong>
+            <span data-i18n="thanks.eurLabel">gesammelt in Euro</span>
+          </div>
+          <div class="thanks-figure">
+            <strong id="collected-cop">0 $</strong>
+            <span data-i18n="thanks.copLabel">weitergeleitet (Lokalwährung)</span>
+          </div>
+        </div>
+
+        <a class="thanks-cta" href="/" data-i18n="thanks.toCampaign"
+          >Zur Kampagnenseite</a
+        >
+      </section>
+
+      <section class="thanks-proofs" aria-labelledby="thanks-proofs-heading">
+        <h2 id="thanks-proofs-heading" data-i18n="thanks.proofsTitle">
+          Nachweise
+        </h2>
+        <ul id="thanks-gallery" class="thanks-gallery"></ul>
+      </section>
+    </main>
+
+    <section id="impressum" class="legal">
+      <h2 data-i18n="imprint.title">Impressum</h2>
+      <p data-i18n="imprint.accordingTo">Angaben gemäß § 5 DDG</p>
+      <address>
+        %OPERATOR_NAME%<br />
+        %OPERATOR_STREET%<br />
+        %OPERATOR_ZIP% %OPERATOR_CITY%<br />
+        <a href="mailto:%OPERATOR_EMAIL%">%OPERATOR_EMAIL%</a><br />
+      </address>
+    </section>
+
+    <section id="datenschutz" class="legal">
+      <h2 data-i18n="privacy.title">Datenschutz</h2>
+      <div data-i18n-list="privacy.body">
+        <p>
+          Diese Seite setzt keine Analyse-Cookies und lädt keine
+          Drittanbieter-Skripte. Die Spracheinstellung kann im Speicher deines
+          Browsers bleiben.
+        </p>
+        <p>
+          Wenn du per Bank überweist, verarbeitet deine Bank die Zahlungsdaten.
+          Wenn du den PayPal- oder Wise-Link nutzt, gilt die
+          Datenschutzerklärung von PayPal bzw. Wise. Anfragen per E-Mail
+          speichere ich, um zu antworten.
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p class="credit">
+        <span data-i18n="nav.credit"
+          >Open-Source-Vorlage: private-fundraising-campaign</span
+        >
+      </p>
+    </footer>
+
+    <dialog id="lightbox" class="lightbox">
+      <button
+        type="button"
+        class="lightbox-close"
+        data-i18n-aria="lightbox.close"
+        aria-label="Schließen"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="lightbox-prev"
+        data-i18n-aria="lightbox.prev"
+        aria-label="Vorheriges Medium"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="lightbox-next"
+        data-i18n-aria="lightbox.next"
+        aria-label="Nächstes Medium"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <img alt="" />
+      <video controls playsinline preload="none" hidden></video>
+    </dialog>
+
+    <script type="module" src="/src/thanks.ts"></script>
+  </body>
+</html>

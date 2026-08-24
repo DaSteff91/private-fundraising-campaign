@@ -1,0 +1,13 @@
+node_modules
+src
+public
+live
+.git
+.env
+.env.example
+*.md
+!NOTICE
+tsconfig.json
+vite.config.ts
+vitest.config.ts
+index.html

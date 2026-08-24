@@ -1,0 +1,39 @@
+services:
+  app:
+    build: .
+    image: private-fundraising-campaign:local
+    container_name: private-fundraising-campaign
+    ports:
+      - "7890:7890"
+    environment:
+      PORT: "7890"
+      # Reach CMS by container name on the compose network (not host 127.0.0.1).
+      POCKETBASE_UPSTREAM: http://pfc-cms:8090
+    restart: unless-stopped
+    depends_on:
+      - pocketbase
+
+  pocketbase:
+    build: ./pocketbase
+    image: pfc-cms:local
+    container_name: pfc-cms
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5789:8090"
+    volumes:
+      - ./pb_data:/pb/pb_data
+      - ./pocketbase/pb_migrations:/pb/pb_migrations:ro
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://127.0.0.1:8090/api/health",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s

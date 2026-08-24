@@ -1,0 +1,522 @@
+{
+  "de": {
+    "meta": {
+      "title": "Sams Werkstatt — privater Spendenaufruf",
+      "description": "Privater Spendenaufruf, um Sam nach einem Sturm beim Wiederaufbau der Werkstatt zu helfen. Keine Hilfsorganisation, keine steuerlich absetzbare Spende."
+    },
+    "nav": {
+      "skip": "Zum Inhalt",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz",
+      "credit": "Open-Source-Vorlage: private-fundraising-campaign"
+    },
+    "hero": {
+      "title": "Hilfe für Sams Werkstatt!",
+      "lead": "Ein Spätsommersturm hat die kleine Werkstatt von jemandem, den ich kenne, beschädigt: Sam. Diese Seite sammelt etwas Geld für Dach und Werkzeug.",
+      "toDonate": "Direkt zur Spende",
+      "photoAlts": [
+        "Illustration einer kleinen Werkstatt",
+        "Illustration von Werkzeugen auf einer Werkbank",
+        "Illustration von Sturmwolken über einem Hang"
+      ],
+      "videoAlts": []
+    },
+    "gallery": {
+      "photos": "Fotos",
+      "videos": "Videos"
+    },
+    "lightbox": {
+      "enlarge": "Bild vergrößern",
+      "close": "Schließen",
+      "prev": "Vorheriges Medium",
+      "next": "Nächstes Medium",
+      "play": "Video abspielen"
+    },
+    "story": {
+      "title": "Wer ist Sam?",
+      "body": [
+        "Sam betreibt eine kleine Nachbarschaftswerkstatt — Reparaturen, Gelegenheitsjobs, der Ort, an dem Leute mit einem kaputten Stuhl vorbeikommen. Nach dem Sturm tropfte das Dach und mehrere Werkzeuge waren hin. Diese Demo-Kampagne zeigt, wie eine private Hilfeseite aussehen kann; ersetze die Geschichte durch deine."
+      ],
+      "photoAlt": "Illustration einer Person an der Werkbank in einer Werkstatt"
+    },
+    "location": {
+      "title": "Wo ist das passiert?",
+      "body": "Eine erfundene Küstenstadt — ersetze das beim Forken durch deinen echten Ort.",
+      "photoAlt": "Einfacher Karten-Platzhalter für den Ort der Demo-Kampagne"
+    },
+    "purpose": {
+      "title": "So wird das Geld verwendet",
+      "body": [
+        "Beiträge landen zuerst auf dem Konto der betreibenden Person. Die Summe geht danach an Sam (oder eine Vertrauensperson vor Ort) für Dach, Werkzeug und Material. Namen von Spendenden werden nicht veröffentlicht.",
+        "Wichtig: Das ist keine steuerlich absetzbare Spende. Es gibt keine Zuwendungsbestätigung. Es ist privat organisiert — keine Hilfsorganisation."
+      ],
+      "leftover": "Wenn nach der Währungsumrechnung ein paar Cent übrig bleiben, gehen sie an den Bruchteil eines Kaffees. Vertretbar?"
+    },
+    "pay": {
+      "title": "So kannst du helfen",
+      "intro": "Betrag wählen, Zahlungsweg wählen, fertig. Verwendungszweck bei der Bank bitte unverändert lassen — wie in den Überweisungsdaten angezeigt.",
+      "stepAmount": "1. Betrag auswählen",
+      "stepMethod": "2. Methode auswählen",
+      "stepDetails": "3. Zahlung",
+      "methodListLabel": "Zahlungsmethode",
+      "methodPaypal": "PayPal",
+      "methodBank": "Überweisung",
+      "methodWise": "Wise",
+      "amountLabel": "Betrag in Euro",
+      "custom": "Anderer Betrag",
+      "qrHint": "Den generierten QR Code mit der Banking-App scannen oder die Daten direkt kopieren.",
+      "copyName": "Name kopieren",
+      "copyIban": "IBAN kopieren",
+      "copyBic": "BIC kopieren",
+      "copyAmount": "Betrag kopieren",
+      "copyPurpose": "Verwendungszweck kopieren",
+      "copied": "Kopiert",
+      "fieldsLegend": "Überweisungsdaten",
+      "recipient": "Empfänger",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "purpose": "Verwendungszweck",
+      "amount": "Betrag",
+      "closed": "Die Sammlung ist beendet. Vielen Dank.",
+      "paypalTitle": "PayPal",
+      "paypalBody": "Link öffnet paypal.com mit dem gewählten Betrag. Bitte als Freunde:innen-Zahlung in Euro senden (Guthaben oder Bank).",
+      "paypalButton": "Mit PayPal öffnen",
+      "paypalExternal": "Öffnet paypal.com",
+      "wiseTitle": "Wise",
+      "wiseBody": "Für internationale Transfers oder wenn du Wise schon nutzt. Der Link öffnet wise.com — ein Konto ist nicht zwingend nötig. Keine Kartenzahlung auf dieser Seite.",
+      "wiseButton": "Auf Wise öffnen",
+      "wiseExternal": "Öffnet wise.com"
+    },
+    "progress": {
+      "title": "Stand",
+      "collected": "bisher gesammelt",
+      "updated": "Stand",
+      "unknown": "Stand unbekannt",
+      "empty": "Noch keine Eingänge veröffentlicht.",
+      "phases": {
+        "collecting": "Sammlung läuft bis 31.12.2026.",
+        "funds_sent": "Das Geld ist unterwegs zu Sam bzw. bei der Kontaktperson vor Ort angekommen.",
+        "funds_delivered": "Das Geld ist bei Sam angekommen.",
+        "closed": "Sammlung beendet."
+      }
+    },
+    "timeline": {
+      "title": "Ablauf",
+      "items": [
+        "Bis 31.12.2026: Beiträge auf das Betreiberkonto (PayPal, Überweisung oder Wise).",
+        "Danach: Weiterleitung der Summe an Sam für die Werkstatt.",
+        "Optional erscheinen später Nachweise (nur Betrag + Datum)."
+      ]
+    },
+    "imprint": {
+      "title": "Impressum",
+      "accordingTo": "Angaben gemäß § 5 DDG"
+    },
+    "privacy": {
+      "title": "Datenschutz",
+      "body": [
+        "Diese Seite setzt keine Analyse-Cookies und lädt keine Drittanbieter-Skripte. Die Spracheinstellung kann im Speicher deines Browsers bleiben.",
+        "Wenn du per Bank überweist, verarbeitet deine Bank die Zahlungsdaten. Wenn du den PayPal- oder Wise-Link nutzt, gilt die Datenschutzerklärung von PayPal bzw. Wise. Anfragen per E-Mail speichere ich, um zu antworten."
+      ]
+    },
+    "thanks": {
+      "title": "DANKE",
+      "lead": "Die Sammlung ist abgeschlossen. Gemeinsam ist ein Betrag zusammengekommen, der weitergeleitet wurde.",
+      "eurLabel": "gesammelt in Euro",
+      "copLabel": "weitergeleitet (Lokalwährung)",
+      "toCampaign": "Zur Kampagnenseite",
+      "backHome": "Zur Danke-Seite",
+      "proofsTitle": "Nachweise"
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Sam's Workshop — private fundraiser",
+      "description": "A private appeal to help Sam rebuild a workshop after a storm. Not a charity, not a tax-deductible donation."
+    },
+    "nav": {
+      "skip": "Skip to content",
+      "imprint": "Imprint (Impressum)",
+      "privacy": "Privacy",
+      "credit": "Open-source template: private-fundraising-campaign"
+    },
+    "hero": {
+      "title": "Help for Sam's workshop!",
+      "lead": "A late-summer storm damaged the small workshop of someone I know: Sam. This page collects a little money so tools and a roof can be replaced.",
+      "toDonate": "Go to donation",
+      "photoAlts": [
+        "Illustration of a small workshop building",
+        "Illustration of tools on a workbench",
+        "Illustration of storm clouds over a hillside"
+      ],
+      "videoAlts": []
+    },
+    "gallery": {
+      "photos": "Photos",
+      "videos": "Videos"
+    },
+    "lightbox": {
+      "enlarge": "Enlarge image",
+      "close": "Close",
+      "prev": "Previous media",
+      "next": "Next media",
+      "play": "Play video"
+    },
+    "story": {
+      "title": "Who is Sam?",
+      "body": [
+        "Sam runs a tiny neighbourhood workshop — repairs, odd jobs, the kind of place people drop by with a broken chair. After the storm, the roof leaked and several tools were ruined. This demo campaign shows how a private help page can look; replace the story with yours."
+      ],
+      "photoAlt": "Illustration of a person at a workbench inside a workshop"
+    },
+    "location": {
+      "title": "Where did this happen?",
+      "body": "A fictional coastal town — swap this for your real place when you fork the template.",
+      "photoAlt": "Simple map placeholder for the demo campaign location"
+    },
+    "purpose": {
+      "title": "How the money will be used",
+      "body": [
+        "Contributions land in the operator's account first. The sum is then forwarded to Sam (or a trusted person on the ground) for roofing, tools, and materials. Names of donors are not published.",
+        "Important: this is not a tax-deductible donation. There is no donation receipt. It is privately organised — not a charity."
+      ],
+      "leftover": "If a few cents remain after currency conversion, they go toward a fraction of a coffee. Fair enough?"
+    },
+    "pay": {
+      "title": "How to help",
+      "intro": "Pick an amount, choose how to pay, done. Please leave the bank payment reference as shown in the transfer details.",
+      "stepAmount": "1. Choose amount",
+      "stepMethod": "2. Choose method",
+      "stepDetails": "3. Pay",
+      "methodListLabel": "Payment method",
+      "methodPaypal": "PayPal",
+      "methodBank": "Bank transfer",
+      "methodWise": "Wise",
+      "amountLabel": "Amount in euro",
+      "custom": "Other amount",
+      "qrHint": "Scan the generated QR code with your banking app, or copy the details directly.",
+      "copyName": "Copy name",
+      "copyIban": "Copy IBAN",
+      "copyBic": "Copy BIC",
+      "copyAmount": "Copy amount",
+      "copyPurpose": "Copy payment reference",
+      "copied": "Copied",
+      "fieldsLegend": "Transfer details",
+      "recipient": "Recipient",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "purpose": "Payment reference",
+      "amount": "Amount",
+      "closed": "This collection has ended. Thank you.",
+      "paypalTitle": "PayPal",
+      "paypalBody": "Opens paypal.com with your amount. Please send as a friends-and-family payment in euro (balance or bank).",
+      "paypalButton": "Open PayPal",
+      "paypalExternal": "This opens paypal.com",
+      "wiseTitle": "Wise",
+      "wiseBody": "For international transfers, or if you already use Wise. Opens wise.com — a Wise account is not required. This site does not take card payments.",
+      "wiseButton": "Open Wise",
+      "wiseExternal": "This opens wise.com"
+    },
+    "progress": {
+      "title": "Progress",
+      "collected": "collected so far",
+      "updated": "Updated",
+      "unknown": "Status unknown",
+      "empty": "No incoming transfers published yet.",
+      "phases": {
+        "collecting": "Collection open until 31 December 2026.",
+        "funds_sent": "The money is on its way to Sam, or has arrived with the on-the-ground contact.",
+        "funds_delivered": "The money has been passed on to Sam.",
+        "closed": "Collection closed."
+      }
+    },
+    "timeline": {
+      "title": "What happens next",
+      "items": [
+        "Until 31 December 2026: contributions to the operator account (PayPal, bank transfer, or Wise).",
+        "Then: the sum is forwarded to Sam for workshop repairs.",
+        "Optional proof crops (amount + date only) may appear here later."
+      ]
+    },
+    "imprint": {
+      "title": "Imprint (Impressum)",
+      "accordingTo": "Information according to section 5 DDG"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "body": [
+        "This page does not set analytics cookies and does not load third-party scripts. Your language choice may stay in your browser storage.",
+        "If you transfer by bank, your bank processes the payment data. If you use the PayPal or Wise link, that company's privacy notice applies. Emails you send me are stored so I can reply."
+      ]
+    },
+    "thanks": {
+      "title": "THANK YOU",
+      "lead": "The collection has closed. Together we raised an amount that has now been forwarded.",
+      "eurLabel": "collected in euro",
+      "copLabel": "forwarded (local currency)",
+      "toCampaign": "Visit the campaign page",
+      "backHome": "Back to thank-you",
+      "proofsTitle": "Proof"
+    }
+  },
+  "pt": {
+    "meta": {
+      "title": "Oficina do Sam — campanha particular",
+      "description": "Campanha particular para ajudar o Sam a reconstruir a oficina depois de uma tempestade. Não é uma ONG e não há benefício fiscal."
+    },
+    "nav": {
+      "skip": "Saltar para o conteúdo",
+      "imprint": "Impressum",
+      "privacy": "Privacidade",
+      "credit": "Modelo open-source: private-fundraising-campaign"
+    },
+    "hero": {
+      "title": "Ajuda para a oficina do Sam!",
+      "lead": "Uma tempestade de fim de verão danificou a pequena oficina de alguém que eu conheço: o Sam. Esta página junta um pouco de dinheiro para telhado e ferramentas.",
+      "toDonate": "Ir para a doação",
+      "photoAlts": [
+        "Ilustração de uma pequena oficina",
+        "Ilustração de ferramentas numa bancada",
+        "Ilustração de nuvens de tempestade sobre uma encosta"
+      ],
+      "videoAlts": []
+    },
+    "gallery": {
+      "photos": "Fotos",
+      "videos": "Vídeos"
+    },
+    "lightbox": {
+      "enlarge": "Ampliar imagem",
+      "close": "Fechar",
+      "prev": "Mídia anterior",
+      "next": "Próxima mídia",
+      "play": "Reproduzir vídeo"
+    },
+    "story": {
+      "title": "Quem é o Sam?",
+      "body": [
+        "O Sam tem uma oficina pequenina no bairro — reparos, biscates, o tipo de lugar onde alguém chega com uma cadeira quebrada. Depois da tempestade, o telhado vazava e várias ferramentas estragaram. Esta campanha de demonstração mostra como pode ser uma página de ajuda particular; troque a história pela sua."
+      ],
+      "photoAlt": "Ilustração de uma pessoa na bancada dentro de uma oficina"
+    },
+    "location": {
+      "title": "Onde isso aconteceu?",
+      "body": "Uma cidade costeira fictícia — troque pelo seu lugar real ao fazer o fork.",
+      "photoAlt": "Mapa simples de placeholder para o local da campanha demo"
+    },
+    "purpose": {
+      "title": "Como o dinheiro será usado",
+      "body": [
+        "As contribuições chegam primeiro na conta de quem opera a página. Depois a soma é repassada ao Sam (ou a alguém de confiança no local) para telhado, ferramentas e material. Nomes de quem doa não são publicados.",
+        "Importante: isto não é uma doação com benefício fiscal. Não há recibo. É organizado de forma particular — não é uma ONG."
+      ],
+      "leftover": "Se sobrarem alguns centavos depois da conversão, vão para uma fração de um café. Justo?"
+    },
+    "pay": {
+      "title": "Como ajudar",
+      "intro": "Escolha o valor, escolha o método, pronto. Na transferência, deixe a descrição como aparece nos dados de pagamento.",
+      "stepAmount": "1. Escolher valor",
+      "stepMethod": "2. Escolher método",
+      "stepDetails": "3. Pagar",
+      "methodListLabel": "Método de pagamento",
+      "methodPaypal": "PayPal",
+      "methodBank": "Transferência",
+      "methodWise": "Wise",
+      "amountLabel": "Valor em euro",
+      "custom": "Outro valor",
+      "qrHint": "Escaneie o QR gerado com o app do banco, ou copie os dados diretamente.",
+      "copyName": "Copiar nome",
+      "copyIban": "Copiar IBAN",
+      "copyBic": "Copiar BIC",
+      "copyAmount": "Copiar valor",
+      "copyPurpose": "Copiar descrição",
+      "copied": "Copiado",
+      "fieldsLegend": "Dados da transferência",
+      "recipient": "Destinatário",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "purpose": "Descrição",
+      "amount": "Valor",
+      "closed": "A arrecadação terminou. Obrigado.",
+      "paypalTitle": "PayPal",
+      "paypalBody": "Abre paypal.com com o seu valor. Envie como pagamento entre amigos em euro (saldo ou banco).",
+      "paypalButton": "Abrir PayPal",
+      "paypalExternal": "Isto abre paypal.com",
+      "wiseTitle": "Wise",
+      "wiseBody": "Para transferências internacionais, ou se você já usa Wise. Abre wise.com — não é obrigatório ter conta Wise. Este site não aceita cartão.",
+      "wiseButton": "Abrir Wise",
+      "wiseExternal": "Isto abre wise.com"
+    },
+    "progress": {
+      "title": "Progresso",
+      "collected": "arrecadado até agora",
+      "updated": "Atualizado",
+      "unknown": "Status desconhecido",
+      "empty": "Ainda não há transferências publicadas.",
+      "phases": {
+        "collecting": "Arrecadação aberta até 31 de dezembro de 2026.",
+        "funds_sent": "O dinheiro está a caminho do Sam, ou já chegou ao contato local.",
+        "funds_delivered": "O dinheiro foi entregue ao Sam.",
+        "closed": "Arrecadação encerrada."
+      }
+    },
+    "timeline": {
+      "title": "O que acontece depois",
+      "items": [
+        "Até 31 de dezembro de 2026: contribuições na conta de quem opera (PayPal, transferência ou Wise).",
+        "Depois: a soma é repassada ao Sam para reparos na oficina.",
+        "Comprovantes opcionais (só valor + data) podem aparecer aqui depois."
+      ]
+    },
+    "imprint": {
+      "title": "Impressum",
+      "accordingTo": "Informações conforme o § 5 DDG"
+    },
+    "privacy": {
+      "title": "Privacidade",
+      "body": [
+        "Esta página não usa cookies de análise e não carrega scripts de terceiros. A escolha de idioma pode ficar no armazenamento do navegador.",
+        "Se você transferir pelo banco, o banco processa os dados do pagamento. Se usar o link do PayPal ou da Wise, vale a política de privacidade deles. E-mails que você me envia são guardados para eu responder."
+      ]
+    },
+    "thanks": {
+      "title": "OBRIGADO",
+      "lead": "A arrecadação terminou. Juntos reunimos um valor que já foi repassado.",
+      "eurLabel": "arrecadado em euro",
+      "copLabel": "repassado (moeda local)",
+      "toCampaign": "Ver a página da campanha",
+      "backHome": "Voltar ao agradecimento",
+      "proofsTitle": "Comprovantes"
+    }
+  },
+  "es": {
+    "meta": {
+      "title": "Taller de Sam — campaña privada",
+      "description": "Campaña privada para ayudar a Sam a reconstruir el taller tras una tormenta. No es una ONG ni una donación desgravable."
+    },
+    "nav": {
+      "skip": "Saltar al contenido",
+      "imprint": "Impressum",
+      "privacy": "Privacidad",
+      "credit": "Plantilla open source: private-fundraising-campaign"
+    },
+    "hero": {
+      "title": "¡Ayuda para el taller de Sam!",
+      "lead": "Una tormenta de finales de verano dañó el pequeño taller de alguien que conozco: Sam. Esta página reúne un poco de dinero para el tejado y las herramientas.",
+      "toDonate": "Ir a la donación",
+      "photoAlts": [
+        "Ilustración de un pequeño taller",
+        "Ilustración de herramientas en un banco de trabajo",
+        "Ilustración de nubes de tormenta sobre una ladera"
+      ],
+      "videoAlts": []
+    },
+    "gallery": {
+      "photos": "Fotos",
+      "videos": "Vídeos"
+    },
+    "lightbox": {
+      "enlarge": "Ampliar imagen",
+      "close": "Cerrar",
+      "prev": "Medio anterior",
+      "next": "Siguiente medio",
+      "play": "Reproducir vídeo"
+    },
+    "story": {
+      "title": "¿Quién es Sam?",
+      "body": [
+        "Sam lleva un taller diminuto del barrio: reparaciones, chapuzas, el sitio donde alguien llega con una silla rota. Tras la tormenta, el tejado gotaba y varias herramientas quedaron inservibles. Esta campaña de demostración muestra cómo puede verse una página de ayuda privada; sustituye la historia por la tuya."
+      ],
+      "photoAlt": "Ilustración de una persona en el banco de trabajo dentro de un taller"
+    },
+    "location": {
+      "title": "¿Dónde ocurrió?",
+      "body": "Un pueblo costero ficticio: cámbialo por tu lugar real al hacer fork.",
+      "photoAlt": "Mapa sencillo de marcador de posición para la ubicación de la demo"
+    },
+    "purpose": {
+      "title": "Cómo se usará el dinero",
+      "body": [
+        "Las aportaciones llegan primero a la cuenta de quien opera la página. Luego se reenvía la suma a Sam (o a una persona de confianza in situ) para tejado, herramientas y material. No se publican nombres de quienes aportan.",
+        "Importante: no es una donación desgravable. No hay recibo. Está organizada de forma privada: no es una ONG."
+      ],
+      "leftover": "Si quedan unos céntimos tras la conversión de divisa, van a una fracción de un café. ¿Te parece bien?"
+    },
+    "pay": {
+      "title": "Cómo ayudar",
+      "intro": "Elige importe, elige método, listo. Deja el concepto bancario tal como aparece en los datos de la transferencia.",
+      "stepAmount": "1. Elegir importe",
+      "stepMethod": "2. Elegir método",
+      "stepDetails": "3. Pagar",
+      "methodListLabel": "Método de pago",
+      "methodPaypal": "PayPal",
+      "methodBank": "Transferencia",
+      "methodWise": "Wise",
+      "amountLabel": "Importe en euro",
+      "custom": "Otro importe",
+      "qrHint": "Escanea el código QR con la app del banco, o copia los datos directamente.",
+      "copyName": "Copiar nombre",
+      "copyIban": "Copiar IBAN",
+      "copyBic": "Copiar BIC",
+      "copyAmount": "Copiar importe",
+      "copyPurpose": "Copiar concepto",
+      "copied": "Copiado",
+      "fieldsLegend": "Datos de la transferencia",
+      "recipient": "Destinatario",
+      "iban": "IBAN",
+      "bic": "BIC",
+      "purpose": "Concepto",
+      "amount": "Importe",
+      "closed": "La recaudación ha terminado. Gracias.",
+      "paypalTitle": "PayPal",
+      "paypalBody": "Abre paypal.com con tu importe. Envíalo como pago entre amigos en euro (saldo o banco).",
+      "paypalButton": "Abrir PayPal",
+      "paypalExternal": "Esto abre paypal.com",
+      "wiseTitle": "Wise",
+      "wiseBody": "Para transferencias internacionales, o si ya usas Wise. Abre wise.com; no hace falta cuenta Wise. Este sitio no acepta tarjeta.",
+      "wiseButton": "Abrir Wise",
+      "wiseExternal": "Esto abre wise.com"
+    },
+    "progress": {
+      "title": "Progreso",
+      "collected": "recaudado hasta ahora",
+      "updated": "Actualizado",
+      "unknown": "Estado desconocido",
+      "empty": "Aún no hay ingresos publicados.",
+      "phases": {
+        "collecting": "Recaudación abierta hasta el 31 de diciembre de 2026.",
+        "funds_sent": "El dinero va de camino a Sam, o ya llegó al contacto local.",
+        "funds_delivered": "El dinero se ha entregado a Sam.",
+        "closed": "Recaudación cerrada."
+      }
+    },
+    "timeline": {
+      "title": "Qué pasa después",
+      "items": [
+        "Hasta el 31 de diciembre de 2026: aportaciones a la cuenta del operador (PayPal, transferencia o Wise).",
+        "Después: se reenvía la suma a Sam para reparar el taller.",
+        "Más adelante pueden aparecer comprobantes opcionales (solo importe + fecha)."
+      ]
+    },
+    "imprint": {
+      "title": "Impressum",
+      "accordingTo": "Información según el § 5 DDG"
+    },
+    "privacy": {
+      "title": "Privacidad",
+      "body": [
+        "Esta página no usa cookies de análisis ni carga scripts de terceros. La elección de idioma puede guardarse en el almacenamiento del navegador.",
+        "Si transfieres por banco, tu banco trata los datos del pago. Si usas el enlace de PayPal o Wise, aplica su aviso de privacidad. Los correos que me envías se guardan para poder responder."
+      ]
+    },
+    "thanks": {
+      "title": "GRACIAS",
+      "lead": "La recaudación ha cerrado. Juntos reunimos un importe que ya se ha reenviado.",
+      "eurLabel": "recaudado en euro",
+      "copLabel": "reenviado (moneda local)",
+      "toCampaign": "Ver la página de la campaña",
+      "backHome": "Volver al agradecimiento",
+      "proofsTitle": "Comprobantes"
+    }
+  }
+}

@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Sam's Workshop — private Hilfe</title>
+    <meta
+      name="description"
+      content="Private Hilfe für Sams Werkstatt nach einem Sturm. Nicht steuerlich absetzbar."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="%SITE_URL%/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%SITE_URL%/" />
+    <meta property="og:title" content="Sam's Workshop — private Hilfe" />
+    <meta
+      property="og:description"
+      content="Private Hilfe für Sams Werkstatt nach einem Sturm."
+    />
+    <meta property="og:image" content="%SITE_URL%/og.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Zum Inhalt</a>
+    <header class="top">
+      <nav class="langs" aria-label="Language">
+        <a href="?lang=de" data-lang="de" aria-current="page">DE</a>
+        <a href="?lang=en" data-lang="en">EN</a>
+        <a href="?lang=pt" data-lang="pt">PT</a>
+        <a href="?lang=es" data-lang="es">ES</a>
+      </nav>
+      <p class="back-home">
+        <a href="/thanks" data-i18n="thanks.backHome">Zur Danke-Seite</a>
+      </p>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1 data-i18n="hero.title">Hilfe für Sams Werkstatt!</h1>
+          <p class="lead" data-i18n="hero.lead">
+            Ein Spätsommersturm hat die kleine Werkstatt von jemandem, den ich
+            kenne, beschädigt: Sam. Diese Seite sammelt etwas Geld für Dach und
+            Werkzeug.
+          </p>
+          <a class="hero-donate" href="#zahlen" data-i18n="hero.toDonate"
+            >Direkt zur Spende</a
+          >
+        </div>
+        <div class="hero-gallery" id="hero-gallery"></div>
+      </section>
+
+      <section>
+        <h2 data-i18n="story.title">Wer ist Sam?</h2>
+        <div data-i18n-list="story.body">
+          <p>
+            Sam betreibt eine kleine Nachbarschaftswerkstatt. Nach dem Sturm
+            tropfte das Dach und mehrere Werkzeuge waren hin. Demo-Inhalt —
+            ersetze die Geschichte durch deine.
+          </p>
+          <p>
+            Diese Seite ist keine Hilfsorganisation. Es ist eine private
+            Sammlung unter Freundinnen und Freunden, bis zum 31.12.2026.
+          </p>
+        </div>
+        <a
+          class="zoomable story-photo"
+          href="/media/photo-story.svg"
+          aria-haspopup="dialog"
+        >
+          <img
+            src="/media/photo-story.svg"
+            width="480"
+            height="640"
+            alt="Illustration einer Person an der Werkbank in einer Werkstatt"
+            data-i18n-alt="story.photoAlt"
+            decoding="async"
+            loading="lazy"
+          />
+        </a>
+      </section>
+
+      <section>
+        <h2 data-i18n="location.title">Wo ist das passiert?</h2>
+        <figure class="location-map">
+          <a
+            class="zoomable location-photo"
+            href="/media/location.svg"
+            aria-haspopup="dialog"
+          >
+            <img
+              src="/media/location.svg"
+              width="640"
+              height="800"
+              alt="Einfacher Karten-Platzhalter für den Ort der Demo-Kampagne"
+              data-i18n-alt="location.photoAlt"
+              decoding="async"
+              loading="lazy"
+            />
+          </a>
+          <p data-i18n="location.body">
+            Eine erfundene Küstenstadt — ersetze das beim Forken durch deinen echten Ort.
+          </p>
+        </figure>
+      </section>
+
+      <section>
+        <h2 data-i18n="purpose.title">Wofür das Geld ist</h2>
+        <div data-i18n-list="purpose.body">
+          <p>
+            Beiträge landen zuerst auf dem Betreiberkonto. Die Summe geht
+            danach an Sam für Dach, Werkzeug und Material.
+          </p>
+          <p>
+            Das ist keine steuerlich absetzbare Spende. Es gibt keine
+            Zuwendungsbestätigung.
+          </p>
+        </div>
+        <p class="note" data-i18n="purpose.leftover">
+          Wenn nach der Währungsumrechnung ein paar Cent übrig bleiben, gehen
+          sie an den Bruchteil eines Kaffees.
+        </p>
+      </section>
+
+      <section id="zahlen">
+        <h2 data-i18n="pay.title">So kannst du helfen</h2>
+        <p data-i18n="pay.intro">
+          Betrag wählen, Zahlungsweg wählen, fertig. Verwendungszweck bei der
+          Bank bitte unverändert lassen — wie in den Überweisungsdaten.
+        </p>
+
+        <div id="pay-open" class="pay-flow">
+          <div class="pay-step">
+            <h3 class="pay-step-label" data-i18n="pay.stepAmount">
+              1. Betrag auswählen
+            </h3>
+            <fieldset class="amounts">
+              <legend class="visually-hidden" data-i18n="pay.amountLabel">
+                Betrag in Euro
+              </legend>
+              <div class="amount-box">
+                <div class="amount-row" id="amount-presets"></div>
+                <label class="custom">
+                  <span data-i18n="pay.custom">Anderer Betrag</span>
+                  <input
+                    id="amount-custom"
+                    type="number"
+                    min="0.01"
+                    max="999999999.99"
+                    step="0.01"
+                    inputmode="decimal"
+                    value="10"
+                  />
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="pay-step">
+            <h3 class="pay-step-label" data-i18n="pay.stepMethod">
+              2. Methode auswählen
+            </h3>
+            <div
+              class="method-tabs"
+              role="tablist"
+              aria-label="Zahlungsmethode"
+              data-i18n-aria="pay.methodListLabel"
+            >
+              <button
+                type="button"
+                class="method-tab"
+                role="tab"
+                id="tab-paypal"
+                data-method="paypal"
+                aria-controls="panel-paypal"
+                aria-selected="true"
+              >
+                <span data-i18n="pay.methodPaypal">PayPal</span>
+              </button>
+              <button
+                type="button"
+                class="method-tab"
+                role="tab"
+                id="tab-bank"
+                data-method="bank"
+                aria-controls="panel-bank"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <span data-i18n="pay.methodBank">Überweisung</span>
+              </button>
+              <button
+                type="button"
+                class="method-tab"
+                role="tab"
+                id="tab-wise"
+                data-method="wise"
+                aria-controls="panel-wise"
+                aria-selected="false"
+                tabindex="-1"
+              >
+                <span data-i18n="pay.methodWise">Wise</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pay-step">
+            <h3 class="pay-step-label" data-i18n="pay.stepDetails">
+              3. Zahlung
+            </h3>
+
+            <div
+              class="method-panel"
+              role="tabpanel"
+              id="panel-paypal"
+              aria-labelledby="tab-paypal"
+            >
+              <p class="method-lead" data-i18n="pay.paypalBody">
+                Link öffnet paypal.com mit dem gewählten Betrag. Bitte als
+                Freund:innen-Zahlung in Euro senden (Guthaben oder Bank). Keine
+                Kartenzahlung auf dieser Seite.
+              </p>
+              <a
+                class="paypal-btn"
+                href="%PAYPAL_ME_URL%"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span data-i18n="pay.paypalButton">Mit PayPal öffnen</span>
+              </a>
+            </div>
+
+            <div
+              class="method-panel"
+              role="tabpanel"
+              id="panel-bank"
+              aria-labelledby="tab-bank"
+              hidden
+            >
+              <div class="pay-grid">
+                <div class="qr-panel">
+                  <div id="qr" class="qr" aria-hidden="true"></div>
+                  <p class="hint" data-i18n="pay.qrHint">
+                    Den Code mit einer zweiten Kamera oder der Banking-App
+                    scannen. Am Handy die Daten lieber kopieren — das eigene
+                    Display lässt sich nicht scannen.
+                  </p>
+                </div>
+                <div class="pay-fields">
+                  <h4 data-i18n="pay.fieldsLegend">Überweisungsdaten</h4>
+                  <dl class="facts">
+                    <div>
+                      <dt data-i18n="pay.recipient">Empfänger</dt>
+                      <dd>
+                        <span id="field-name">%PAYEE_NAME%</span>
+                        <button
+                          type="button"
+                          class="copy"
+                          data-copy="name"
+                          data-i18n-aria="pay.copyName"
+                          aria-label="Name kopieren"
+                        >
+                          <svg
+                            class="icon-copy"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                            ></rect>
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path>
+                          </svg>
+                          <svg
+                            class="icon-check"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </button>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="pay.iban">IBAN</dt>
+                      <dd>
+                        <span id="field-iban">%PAYEE_IBAN%</span>
+                        <button
+                          type="button"
+                          class="copy"
+                          data-copy="iban"
+                          data-i18n-aria="pay.copyIban"
+                          aria-label="IBAN kopieren"
+                        >
+                          <svg
+                            class="icon-copy"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                            ></rect>
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path>
+                          </svg>
+                          <svg
+                            class="icon-check"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </button>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="pay.bic">BIC</dt>
+                      <dd>
+                        <span id="field-bic">%PAYEE_BIC%</span>
+                        <button
+                          type="button"
+                          class="copy"
+                          data-copy="bic"
+                          data-i18n-aria="pay.copyBic"
+                          aria-label="BIC kopieren"
+                        >
+                          <svg
+                            class="icon-copy"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                            ></rect>
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path>
+                          </svg>
+                          <svg
+                            class="icon-check"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </button>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="pay.amount">Betrag</dt>
+                      <dd>
+                        <span id="field-amount">1,00 €</span>
+                        <button
+                          type="button"
+                          class="copy"
+                          data-copy="amount"
+                          data-i18n-aria="pay.copyAmount"
+                          aria-label="Betrag kopieren"
+                        >
+                          <svg
+                            class="icon-copy"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                            ></rect>
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path>
+                          </svg>
+                          <svg
+                            class="icon-check"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </button>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="pay.purpose">Verwendungszweck</dt>
+                      <dd>
+                        <span id="field-purpose">%CAMPAIGN_REMITTANCE%</span>
+                        <button
+                          type="button"
+                          class="copy"
+                          data-copy="purpose"
+                          data-i18n-aria="pay.copyPurpose"
+                          aria-label="Verwendungszweck kopieren"
+                        >
+                          <svg
+                            class="icon-copy"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <rect
+                              x="9"
+                              y="9"
+                              width="13"
+                              height="13"
+                              rx="2"
+                            ></rect>
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            ></path>
+                          </svg>
+                          <svg
+                            class="icon-check"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                        </button>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="method-panel"
+              role="tabpanel"
+              id="panel-wise"
+              aria-labelledby="tab-wise"
+              hidden
+            >
+              <p class="method-lead" data-i18n="pay.wiseBody">
+                Fürs Ausland oder wenn du Wise schon nutzt. Der Link öffnet
+                wise.com — ein Konto ist nicht zwingend nötig. Keine
+                Kartenzahlung auf dieser Seite.
+              </p>
+              <a
+                class="wise-btn"
+                href="%WISE_REQUEST_URL%"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span data-i18n="pay.wiseButton">Auf Wise öffnen</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p id="pay-closed" class="closed" hidden data-i18n="pay.closed">
+          Die Sammlung ist beendet. Vielen Dank.
+        </p>
+
+        <noscript>
+          <table class="plain">
+            <caption>
+              Überweisung ohne JavaScript
+            </caption>
+            <tr>
+              <th>Empfänger</th>
+              <td>%PAYEE_NAME%</td>
+            </tr>
+            <tr>
+              <th>IBAN</th>
+              <td>%PAYEE_IBAN%</td>
+            </tr>
+            <tr>
+              <th>BIC</th>
+              <td>%PAYEE_BIC%</td>
+            </tr>
+            <tr>
+              <th>Verwendungszweck</th>
+              <td>%CAMPAIGN_REMITTANCE%</td>
+            </tr>
+            <tr>
+              <th>PayPal</th>
+              <td><a href="%PAYPAL_ME_URL%">%PAYPAL_ME_URL%</a></td>
+            </tr>
+          </table>
+        </noscript>
+      </section>
+
+      <section id="stand">
+        <h2 data-i18n="progress.title">Stand</h2>
+        <p class="counter">
+          <strong id="collected">0 €</strong>
+          <span data-i18n="progress.collected">bisher gesammelt</span>
+        </p>
+        <p id="phase" class="phase"></p>
+        <p id="updated" class="hint"></p>
+        <ul id="updates" class="updates"></ul>
+      </section>
+
+      <section>
+        <h2 data-i18n="timeline.title">Ablauf</h2>
+        <ul data-i18n-items="timeline.items">
+          <li>
+            Bis 31.12.2026: Beiträge auf das Betreiberkonto (PayPal, Überweisung
+            oder Wise).
+          </li>
+          <li>Danach: Weiterleitung der Summe an Sam für die Werkstatt.</li>
+          <li>Optional erscheinen später Nachweise (nur Betrag + Datum).</li>
+        </ul>
+      </section>
+    </main>
+
+    <section id="impressum" class="legal">
+      <h2 data-i18n="imprint.title">Impressum</h2>
+      <p data-i18n="imprint.accordingTo">Angaben gemäß § 5 DDG</p>
+      <address>
+        %OPERATOR_NAME%<br />
+        %OPERATOR_STREET%<br />
+        %OPERATOR_ZIP% %OPERATOR_CITY%<br />
+        <a href="mailto:%OPERATOR_EMAIL%">%OPERATOR_EMAIL%</a><br />
+      </address>
+    </section>
+
+    <section id="datenschutz" class="legal">
+      <h2 data-i18n="privacy.title">Datenschutz</h2>
+      <div data-i18n-list="privacy.body">
+        <p>
+          Diese Seite setzt keine Analyse-Cookies und lädt keine
+          Drittanbieter-Skripte. Die Spracheinstellung kann im Speicher deines
+          Browsers bleiben.
+        </p>
+        <p>
+          Wenn du per Bank überweist, verarbeitet deine Bank die Zahlungsdaten.
+          Wenn du den PayPal- oder Wise-Link nutzt, gilt die
+          Datenschutzerklärung von PayPal bzw. Wise. Anfragen per E-Mail
+          speichere ich, um zu antworten.
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p class="credit">
+        <span data-i18n="nav.credit"
+          >Open-Source-Vorlage: private-fundraising-campaign</span
+        >
+      </p>
+    </footer>
+
+    <dialog id="lightbox" class="lightbox">
+      <button
+        type="button"
+        class="lightbox-close"
+        data-i18n-aria="lightbox.close"
+        aria-label="Schließen"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="lightbox-prev"
+        data-i18n-aria="lightbox.prev"
+        aria-label="Vorheriges Medium"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="lightbox-next"
+        data-i18n-aria="lightbox.next"
+        aria-label="Nächstes Medium"
+        hidden
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <img alt="" />
+      <video controls playsinline preload="none" hidden></video>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

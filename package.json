@@ -1,0 +1,30 @@
+{
+  "name": "private-fundraising-campaign",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Open-source template for a private (non-charity) fundraising landing page with SEPA QR, PayPal.Me, Wise, and PocketBase CMS.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "start": "node server.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "seed:pb:copy": "npx vite-node scripts/build-copy-seed.ts",
+    "seed:pb": "node scripts/seed-pocketbase.mjs",
+    "pb:fetch": "node scripts/fetch-pocketbase.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "uqr": "^0.1.2"
+  }
+}

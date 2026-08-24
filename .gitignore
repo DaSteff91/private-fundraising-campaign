@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.local
+live/updates/*
+!live/updates/.gitkeep
+!live/updates/example-crop.svg
+pb_data/
+pocketbase/bin/*
+!pocketbase/bin/.gitkeep
+.DS_Store
+*.tar.gz

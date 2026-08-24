@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4efe6"/>
+  <rect x="0" y="420" width="1200" height="210" fill="#e7dcc8"/>
+  <polygon points="470,340 600,210 730,340" fill="#c45c26"/>
+  <rect x="500" y="340" width="200" height="150" fill="#2b241c"/>
+  <text x="80" y="140" font-family="Georgia, serif" font-size="64" fill="#2b241c">Sam's Workshop</text>
+  <text x="80" y="200" font-family="ui-sans-serif, sans-serif" font-size="28" fill="#6b6258">private help · ayuda particular</text>
+</svg>
