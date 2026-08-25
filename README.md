@@ -125,6 +125,10 @@ To cut a release:
 3. Commit, then `git tag vX.Y.Z` and `git push && git push --tags`.
 4. Pushing the tag runs the release workflow, which creates a GitHub Release from that changelog section (and fails if the tag does not match `package.json`).
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Please follow the [Code of Conduct](CODE_OF_CONDUCT.md). To report a vulnerability, use [SECURITY.md](SECURITY.md).
+
 ## License
 
 - Software and demo content: [MIT](LICENSE)
