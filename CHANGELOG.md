@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- GitHub Actions CI workflow: `npm test` and `npm run build` on pushes and pull requests to `main`.
+
 ## [0.1.0] - 2026-08-25
 
 ### Added

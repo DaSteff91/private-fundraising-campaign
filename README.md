@@ -108,6 +108,8 @@ Pages: `/` is the campaign; `/thanks` is the thank-you page.
 
 Source of truth for the template version is `package.json` `"version"`. Git tags are `v` plus that version (e.g. `v0.1.0`). See [CHANGELOG.md](CHANGELOG.md).
 
+Pushes and pull requests to `main` run the CI workflow (unit tests and production build).
+
 Bump meaning for this template:
 
 - **MAJOR** — breaking for operators/forks (env vars removed or renamed, seed/schema contract, required PocketBase major, incompatible build/runtime).
