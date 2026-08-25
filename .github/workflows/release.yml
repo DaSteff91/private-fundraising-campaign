@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify tag matches package.json
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          if [ "$VERSION" != "$PKG_VERSION" ]; then
+            echo "Tag $TAG does not match package.json version $PKG_VERSION"
+            exit 1
+          fi
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Extract changelog section
+        run: |
+          node <<'EOF'
+          const fs = require("node:fs");
+          const version = process.env.VERSION;
+          const changelog = fs.readFileSync("CHANGELOG.md", "utf8");
+          const heading = `## [${version}]`;
+          const start = changelog.indexOf(heading);
+          if (start === -1) {
+            console.error(`Missing CHANGELOG section for ${version}`);
+            process.exit(1);
+          }
+          const after = changelog.slice(start);
+          const next = after.search(/\n## \[/);
+          const section = (next === -1 ? after : after.slice(0, next)).trim() + "\n";
+          fs.writeFileSync("release-notes.md", section);
+          console.log(`Wrote release-notes.md for ${version}`);
+          EOF
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$TAG" --title "$TAG" --notes-file release-notes.md

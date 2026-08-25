@@ -104,6 +104,25 @@ Pages: `/` is the campaign; `/thanks` is the thank-you page.
 - **PayPal.Me:** outbound link only, no JS SDK. Prefer friends-and-family in EUR from balance or linked bank on a personal account.
 - **Languages:** DE / EN / PT / ES. Footer keeps **Impressum** and **Datenschutz** as two links.
 
+## Versioning & releases
+
+Source of truth for the template version is `package.json` `"version"`. Git tags are `v` plus that version (e.g. `v0.1.0`). See [CHANGELOG.md](CHANGELOG.md).
+
+Bump meaning for this template:
+
+- **MAJOR** — breaking for operators/forks (env vars removed or renamed, seed/schema contract, required PocketBase major, incompatible build/runtime).
+- **MINOR** — backward-compatible features.
+- **PATCH** — fixes, docs, or chore with no contract break.
+
+Call out PocketBase pin changes (`PB_VERSION` / `scripts/fetch-pocketbase.mjs`) and schema or env changes in the changelog when they matter to adopters.
+
+To cut a release:
+
+1. Bump `version` in `package.json` (and the matching fields in `package-lock.json`).
+2. Move items from `[Unreleased]` in `CHANGELOG.md` into a dated `## [X.Y.Z]` section.
+3. Commit, then `git tag vX.Y.Z` and `git push && git push --tags`.
+4. Pushing the tag runs the release workflow, which creates a GitHub Release from that changelog section (and fails if the tag does not match `package.json`).
+
 ## License
 
 - Software and demo content: [MIT](LICENSE)
