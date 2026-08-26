@@ -41,6 +41,8 @@ Full stack with Docker (after `npm run pb:fetch` and `npm run build`):
 docker compose up --build
 ```
 
+Before publishing with real payee data, see [SECURITY.md](SECURITY.md).
+
 ## What belongs in `.env`
 
 | Variable | Notes |
