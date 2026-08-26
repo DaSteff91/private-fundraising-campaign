@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Ensure PocketBase collections exist and upsert settings, donations, translations.
+ * Upsert settings, donations, and translations into PocketBase.
+ * Schema is applied by migrations (`npm run pb:migrate`), not by this script.
  *
  * Usage:
  *   PB_ADMIN_EMAIL=… PB_ADMIN_PASSWORD=… npm run seed:pb
@@ -65,131 +66,6 @@ async function authToken() {
       body: { identity: email, password },
     });
     return data.token;
-  }
-}
-
-function publicRules() {
-  return {
-    listRule: "",
-    viewRule: "",
-    createRule: null,
-    updateRule: null,
-    deleteRule: null,
-  };
-}
-
-function textField(name, opts = {}) {
-  return {
-    name,
-    type: "text",
-    required: Boolean(opts.required),
-    ...opts,
-  };
-}
-
-function numberField(name, opts = {}) {
-  return {
-    name,
-    type: "number",
-    required: Boolean(opts.required),
-    ...opts,
-  };
-}
-
-function selectField(name, values, opts = {}) {
-  return {
-    name,
-    type: "select",
-    required: Boolean(opts.required),
-    maxSelect: 1,
-    values,
-  };
-}
-
-function fileField(name) {
-  return {
-    name,
-    type: "file",
-    required: false,
-    maxSelect: 1,
-    maxSize: 5_242_880,
-    mimeTypes: ["image/webp", "image/jpeg", "image/png"],
-  };
-}
-
-function jsonField(name, opts = {}) {
-  return {
-    name,
-    type: "json",
-    required: Boolean(opts.required),
-  };
-}
-
-const COLLECTION_DEFS = [
-  {
-    name: "settings",
-    type: "base",
-    ...publicRules(),
-    fields: [
-      textField("closeDate", { required: true }),
-      selectField("phase", PHASES, { required: true }),
-      textField("updatedAt", { required: true }),
-      numberField("amountPesos", { required: false }),
-    ],
-  },
-  {
-    name: "donations",
-    type: "base",
-    ...publicRules(),
-    fields: [
-      textField("date", { required: true }),
-      numberField("amountEur", { required: false }),
-      fileField("image"),
-      textField("captionDe"),
-      textField("captionEn"),
-      textField("captionPt"),
-      textField("captionEs"),
-    ],
-  },
-  {
-    name: "translations",
-    type: "base",
-    ...publicRules(),
-    fields: [
-      { ...textField("lang", { required: true }), unique: true },
-      jsonField("payload", { required: true }),
-    ],
-  },
-];
-
-async function ensureCollections(token) {
-  const existing = await api("/api/collections?perPage=200", { token });
-  const byName = new Map((existing.items || []).map((c) => [c.name, c]));
-
-  for (const def of COLLECTION_DEFS) {
-    const current = byName.get(def.name);
-    if (!current) {
-      await api("/api/collections", { method: "POST", token, body: def });
-      console.log(`created collection ${def.name}`);
-      continue;
-    }
-
-    const have = new Set((current.fields || []).map((f) => f.name));
-    const missing = def.fields.filter((f) => !have.has(f.name));
-    if (missing.length === 0) {
-      console.log(`collection ${def.name} already exists`);
-      continue;
-    }
-
-    const fields = [...(current.fields || []), ...missing];
-    await api(`/api/collections/${current.id}`, {
-      method: "PATCH",
-      token,
-      body: { fields },
-    });
-    console.log(
-      `updated collection ${def.name}: added ${missing.map((f) => f.name).join(", ")}`,
-    );
   }
 }
 
@@ -309,7 +185,6 @@ function loadCopySeed() {
 }
 
 const token = await authToken();
-await ensureCollections(token);
 const campaign = loadCampaignFile();
 await upsertSettings(token, campaign);
 const donations = Array.isArray(campaign.donations)

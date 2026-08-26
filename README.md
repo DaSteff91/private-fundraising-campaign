@@ -18,7 +18,8 @@ npm test
 Then in two terminals:
 
 ```bash
-./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --automigrate=false
+npm run pb:migrate     # creates ./pb_data schema from pocketbase/pb_migrations
+./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations --automigrate=false
 ./pocketbase/bin/pocketbase superuser upsert you@example.test 'your-password' --dir=./pb_data
 npm run seed:pb:copy
 PB_ADMIN_EMAIL=you@example.test PB_ADMIN_PASSWORD='your-password' npm run seed:pb

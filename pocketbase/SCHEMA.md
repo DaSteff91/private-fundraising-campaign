@@ -2,8 +2,12 @@
 
 Local admin UI: http://127.0.0.1:5789/_/
 
-Create the superuser on first visit (or set `PB_ADMIN_EMAIL` / `PB_ADMIN_PASSWORD` on the
-`pocketbase` service). Disable public user registration in Settings.
+Create the superuser on first visit (or via `superuser upsert`). Disable public user
+registration in Settings.
+
+Schema lives in [`pb_migrations/`](pb_migrations/) and is applied with
+`npm run pb:migrate` (or automatically when the Docker PocketBase container starts).
+`--automigrate=false` keeps admin UI edits from writing new migration files.
 
 API rules for every collection below: **list** and **view** = public (`""`);
 **create**, **update**, **delete** = admin only (`null`).
@@ -36,15 +40,32 @@ API rules for every collection below: **list** and **view** = public (`""`);
 | `lang` | text (unique) | `de`, `en`, `pt`, `es` |
 | `payload` | json | full `Copy` object (see `src/i18n/types.ts`) |
 
-## Seed
+## Apply schema + seed
 
 ```bash
-docker compose up -d pocketbase
+# Local (PocketBase binary already fetched via npm run setup / pb:fetch)
+npm run pb:migrate
+./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations --automigrate=false
 npm run seed:pb:copy   # writes pocketbase/copy-seed.json from src/i18n
 PB_ADMIN_EMAIL=… PB_ADMIN_PASSWORD=… npm run seed:pb
 ```
 
-`seed:pb` upserts settings (including `amountPesos`), donations (from `live/campaign.json`, with optional image uploads), and translations. Existing collections get missing fields patched in (e.g. `amountPesos`).
+Or with Docker (migrations run on container start):
+
+```bash
+docker compose up -d pocketbase
+npm run seed:pb:copy
+PB_ADMIN_EMAIL=… PB_ADMIN_PASSWORD=… npm run seed:pb
+```
+
+`seed:pb` only upserts data (settings, donations from `live/campaign.json`, translations).
+It does **not** create or patch collections.
+
+### Existing local `pb_data`
+
+If you already created collections via the old seed script, the init migration may fail
+with “already exists”. Stop PocketBase, delete `./pb_data`, then serve / `npm run pb:migrate`
+again (demo data can be re-seeded).
 
 ### Admin: local currency + proof photos without re-seed
 

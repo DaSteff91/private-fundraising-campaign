@@ -29,8 +29,9 @@ if (fetch.status !== 0) {
 console.log(`
 Next steps:
   1. Edit .env (PAYEE_*, OPERATOR_*, CAMPAIGN_*, PayPal / Wise).
-  2. Start PocketBase:
-       ./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --automigrate=false
+  2. Apply schema migrations, then start PocketBase:
+       npm run pb:migrate
+       ./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations --automigrate=false
   3. Create a superuser (other terminal):
        ./pocketbase/bin/pocketbase superuser upsert you@example.test 'your-password' --dir=./pb_data
   4. Seed demo copy + donations:

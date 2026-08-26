@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - GitHub Actions CI workflow: `npm test` and `npm run build` on pushes and pull requests to `main`.
+- Checked-in PocketBase JS migrations for `settings`, `donations`, and `translations` (`npm run pb:migrate`; Docker applies on start).
+
+### Changed
+
+- `seed:pb` upserts campaign data only; schema is no longer created or patched by the seed script.
 
 ## [0.1.0] - 2026-08-25
 

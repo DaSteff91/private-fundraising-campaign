@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "seed:pb:copy": "npx vite-node scripts/build-copy-seed.ts",
     "seed:pb": "node scripts/seed-pocketbase.mjs",
-    "pb:fetch": "node scripts/fetch-pocketbase.mjs"
+    "pb:fetch": "node scripts/fetch-pocketbase.mjs",
+    "pb:migrate": "./pocketbase/bin/pocketbase migrate up --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations"
   },
   "engines": {
     "node": ">=20"
