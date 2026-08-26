@@ -76,15 +76,17 @@ async function listAll(token, collection) {
 
 async function upsertSettings(token, campaign) {
   const phase = PHASES.includes(campaign.phase) ? campaign.phase : "collecting";
-  const amountPesos =
-    typeof campaign.amountPesos === "number" && Number.isFinite(campaign.amountPesos)
-      ? campaign.amountPesos
-      : Number(campaign.amountPesos) || 0;
+  const amountLocalRaw =
+    campaign.amountLocal !== undefined ? campaign.amountLocal : campaign.amountPesos;
+  const amountLocal =
+    typeof amountLocalRaw === "number" && Number.isFinite(amountLocalRaw)
+      ? amountLocalRaw
+      : Number(amountLocalRaw) || 0;
   const body = {
     closeDate,
     phase,
     updatedAt: campaign.updatedAt || closeDate,
-    amountPesos,
+    amountLocal,
   };
   const rows = await listAll(token, "settings");
   if (rows.length === 0) {
@@ -106,9 +108,10 @@ async function replaceDonations(token, donations) {
     await api(`/api/collections/donations/records/${row.id}`, { method: "DELETE", token });
   }
   for (const d of donations) {
+    const rawAmount = d.amount !== undefined ? d.amount : d.amountEur;
     const body = {
       date: d.date,
-      amountEur: typeof d.amountEur === "number" ? d.amountEur : Number(d.amountEur) || 0,
+      amount: typeof rawAmount === "number" ? rawAmount : Number(rawAmount) || 0,
       captionDe: d.caption?.de || "",
       captionEn: d.caption?.en || "",
       captionPt: d.caption?.pt || "",
@@ -169,7 +172,7 @@ function loadCampaignFile() {
     return {
       updatedAt: closeDate,
       phase: "collecting",
-      amountPesos: 0,
+      amountLocal: 0,
       donations: [],
     };
   }

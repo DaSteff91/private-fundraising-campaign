@@ -14,3 +14,5 @@ declare const __OPERATOR_EMAIL__: string;
 declare const __POCKETBASE_URL__: string;
 declare const __CAMPAIGN_NAME__: string;
 declare const __CAMPAIGN_REMITTANCE__: string;
+declare const __DONATION_CURRENCY__: string;
+declare const __LOCAL_CURRENCY__: string;

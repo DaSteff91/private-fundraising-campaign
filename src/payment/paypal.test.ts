@@ -25,12 +25,15 @@ describe("paypalMeHandle", () => {
 });
 
 describe("paypalMeUrl", () => {
-  it("appends a dotted euro amount and EUR", () => {
+  it("appends a dotted amount and currency code", () => {
     expect(paypalMeUrl("ExampleUser", 25)).toBe(
       "https://www.paypal.com/paypalme/ExampleUser/25.00EUR",
     );
     expect(paypalMeUrl("https://paypal.me/ExampleUser", 12.5)).toBe(
       "https://www.paypal.com/paypalme/ExampleUser/12.50EUR",
+    );
+    expect(paypalMeUrl("ExampleUser", 20, "USD")).toBe(
+      "https://www.paypal.com/paypalme/ExampleUser/20.00USD",
     );
   });
 
@@ -40,5 +43,9 @@ describe("paypalMeUrl", () => {
 
   it("rejects out of range amounts via formatAmount", () => {
     expect(() => paypalMeUrl("ExampleUser", 0)).toThrow();
+  });
+
+  it("rejects invalid currency codes", () => {
+    expect(() => paypalMeUrl("ExampleUser", 10, "EU")).toThrow(/currency/);
   });
 });

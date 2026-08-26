@@ -1,138 +1,183 @@
 # Private fundraising campaign
 
-Open-source **template** for a private (non-charity) help landing page: SEPA GiroCode, PayPal.Me, Wise, multilingual copy, and a PocketBase CMS for status and donations.
+Open-source **template** for a private (non-charity) help landing page: SEPA GiroCode (EUR), PayPal.Me, Wise, multilingual copy, and a PocketBase CMS for status and donations.
 
 The bundled demo (“Sam’s Workshop”) is fictional placeholder content under MIT. Replace the story, media, and `.env` values with yours.
 
-## Quick start
+**Agents / Cursor:** see [AGENTS.md](AGENTS.md).
+
+## Prerequisites
+
+- Node.js ≥ 20
+- Path A also needs Docker Compose
+- Path B downloads a PocketBase binary for your OS (`linux`, `macOS`, or Windows amd64)
+
+## Path A — Docker
 
 ```bash
-git clone <your-fork-or-this-repo>.git
+git clone https://github.com/DaSteff91/private-fundraising-campaign.git
 cd private-fundraising-campaign
 npm install
-npm run setup          # copies .env.example → .env, downloads PocketBase
-# edit .env
-npm test
+cp .env.example .env   # or: npm run setup  (also fetches a host PB binary)
+# edit .env if you are not using the demo placeholders
+npm run demo:docker    # build + compose up
+npm run pb:superuser   # demo admin (or create in the admin UI)
+npm run demo:seed
 ```
 
-Then in two terminals:
+- Site: http://127.0.0.1:7890  
+- Admin (localhost only): http://127.0.0.1:5789/_/  
+
+Demo admin (local try-out only — change before go-live): `demo@example.test` / `demopassword-change-me`.
+
+## Path B — Local
 
 ```bash
-npm run pb:migrate     # creates ./pb_data schema from pocketbase/pb_migrations
-./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations --automigrate=false
-./pocketbase/bin/pocketbase superuser upsert you@example.test 'your-password' --dir=./pb_data
-npm run seed:pb:copy
-PB_ADMIN_EMAIL=you@example.test PB_ADMIN_PASSWORD='your-password' npm run seed:pb
+git clone https://github.com/DaSteff91/private-fundraising-campaign.git
+cd private-fundraising-campaign
+npm install
+npm run setup          # .env + PocketBase binary for this machine
+# edit .env if needed
+npm run pb:migrate
+```
+
+Two terminals:
+
+```bash
+npm run pb:serve       # http://127.0.0.1:5789
+```
+
+```bash
+npm run pb:superuser
+npm run demo:seed
 npm run dev            # http://127.0.0.1:7890
 ```
 
-Admin UI: http://127.0.0.1:5789/_/ — disable public user registration.
+Production-shaped static server (after `npm run build`): `npm start`.
 
-Production-shaped static server:
+## Make it yours
 
-```bash
-npm run build
-npm start              # http://127.0.0.1:7890
-```
+1. Edit `.env`: payee, operator (Impressum), `CAMPAIGN_NAME`, `CAMPAIGN_REMITTANCE`, PayPal / Wise.
+2. Currencies:
+   - `DONATION_CURRENCY` — ISO 4217 for UI amounts and PayPal.Me (default `EUR`).
+   - `LOCAL_CURRENCY` — optional ISO 4217 for the thank-you “forwarded” total; leave empty to hide it.
+   - SEPA GiroCode / bank QR is shown **only when** `DONATION_CURRENCY=EUR` (EPC069-12 is EUR-only).
+3. Rewrite copy in `src/i18n/{de,en,pt,es}.ts`, then `npm run demo:seed` (or `npm run seed:pb:copy` + `npm run seed:pb`).
+4. Replace `public/media/*` and update `src/gallery.ts`.
+5. Adjust demo donations in `live/campaign.json`, then re-seed.
 
-Full stack with Docker (after `npm run pb:fetch` and `npm run build`):
+Ongoing updates without a rebuild: PocketBase admin → **settings**, **donations**, **translations**. Phases: `collecting` → `funds_sent` → `funds_delivered` → `closed`.
 
-```bash
-docker compose up --build
-```
+Proof photos: crop to **amount + date**; strip EXIF (`exiftool -all= -overwrite_original path/to/photo.webp`).
 
-Before publishing with real payee data, see [SECURITY.md](SECURITY.md).
-
-## What belongs in `.env`
+### What belongs in `.env`
 
 | Variable | Notes |
 | --- | --- |
 | `CAMPAIGN_NAME` | Display name (thank-you brand, titles). |
 | `CAMPAIGN_REMITTANCE` | SEPA / GiroCode payment reference (ASCII preferred). |
-| `PAYEE_NAME` | Must match the account-holder name **exactly** (SEPA Verification of Payee). |
+| `DONATION_CURRENCY` | ISO 4217 (default `EUR`). |
+| `LOCAL_CURRENCY` | Optional ISO 4217; empty hides the local total. |
+| `PAYEE_NAME` | Must match the account-holder name **exactly** (SEPA VoP). |
 | `PAYEE_IBAN` | Your IBAN, no spaces. |
 | `PAYEE_BIC` | Your bank BIC. |
-| `WISE_REQUEST_URL` | Reusable Wise “from anyone” / Wisetag link, **no fixed amount**. |
-| `PAYPAL_ME_HANDLE` | Personal PayPal.Me handle (or a pasted `paypal.me/…` URL). |
+| `WISE_REQUEST_URL` | Reusable Wise link, **no fixed amount**. |
+| `PAYPAL_ME_HANDLE` | Personal PayPal.Me handle or pasted `paypal.me/…` URL. |
 | `OPERATOR_*` | Impressum / legal operator details. |
 | `SITE_URL` | Public URL. Locally `http://127.0.0.1:7890`. |
-| `POCKETBASE_URL` | Browser API origin. Local: `http://127.0.0.1:5789`. **Production: leave empty** so the page calls `/api` on the same host; `server.mjs` proxies to PocketBase. |
+| `POCKETBASE_URL` | Browser API origin. Local: `http://127.0.0.1:5789`. **Production: leave empty** so the page calls `/api` on the same host. |
 
-Runtime (not baked; Docker/env on the server):
+Runtime (not baked; Docker/env on the server): `POCKETBASE_UPSTREAM` — where `server.mjs` proxies `/api` (Compose: `http://pfc-cms:8090`).
 
-| Variable | Notes |
-| --- | --- |
-| `POCKETBASE_UPSTREAM` | Where `server.mjs` proxies `/api`. Default `http://127.0.0.1:5789`. In Compose: `http://pfc-cms:8090`. |
+Never commit `.env`. `npm run build` bakes payee, Impressum, campaign name/remittance, currencies, and `POCKETBASE_URL` into `dist/`.
 
-Never commit `.env`. `npm run build` bakes payee, Impressum, campaign name/remittance, and `POCKETBASE_URL` into `dist/`.
+If you already have an older local `./pb_data` from before the `amount` / `amountLocal` schema, stop PocketBase, delete `./pb_data`, migrate/serve again, and re-seed.
 
-## Update content without a rebuild
+## Deploy
 
-Use PocketBase admin:
+1. Set production `.env`: real payee/operator, `SITE_URL=https://…`, **empty** `POCKETBASE_URL`.
+2. `npm run build` on a trusted machine, then run Compose (or `npm start` + PocketBase) on the server.
+3. Put **TLS** in front of port `7890` (examples below). Do not expose Node or PocketBase raw to the internet.
+4. Keep PocketBase admin off the WAN (Compose already binds `127.0.0.1:5789`). Use SSH tunnel or VPN for admin.
+5. Follow the checklist in [SECURITY.md](SECURITY.md).
 
-- **settings** — `phase`, `closeDate`, `updatedAt`, `amountPesos`
-- **donations** — one row per payment; optional proof image + captions
-- **translations** — `lang` + JSON `payload` (full copy object)
+Proxy only the app (`127.0.0.1:7890`). Do **not** reverse-proxy `5789` publicly.
 
-Phases: `collecting` → `funds_sent` → `funds_delivered` → `closed`.
+### Caddy
 
-Screenshot rule for proofs: crop to **amount + date**. No names, no IBAN, no other bookings. Strip EXIF before uploading real photos:
-
-```bash
-exiftool -all= -overwrite_original path/to/photo.webp
+```caddyfile
+your.example.com {
+  reverse_proxy 127.0.0.1:7890
+}
 ```
 
-Re-seed from the repo:
+### nginx
 
-```bash
-npm run seed:pb:copy
-PB_ADMIN_EMAIL=… PB_ADMIN_PASSWORD=… npm run seed:pb
+```nginx
+server {
+  listen 443 ssl http2;
+  server_name your.example.com;
+
+  # ssl_certificate     /path/to/fullchain.pem;
+  # ssl_certificate_key /path/to/privkey.pem;
+
+  location / {
+    proxy_pass http://127.0.0.1:7890;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
 ```
 
-`live/campaign.json` is only an input for the seed script.
+### Apache (`mod_proxy` + `mod_ssl`)
 
-## Customize for your campaign
+```apache
+<VirtualHost *:443>
+  ServerName your.example.com
+  # SSLEngine on
+  # SSLCertificateFile      /path/to/fullchain.pem
+  # SSLCertificateKeyFile   /path/to/privkey.pem
 
-1. Edit `.env` (payee, operator, `CAMPAIGN_NAME`, `CAMPAIGN_REMITTANCE`).
-2. Rewrite copy in `src/i18n/{de,en,pt,es}.ts`, then `npm run seed:pb:copy`.
-3. Replace `public/media/*` and update `src/gallery.ts`.
-4. Adjust demo donations in `live/campaign.json`.
+  ProxyPreserveHost On
+  ProxyPass        / http://127.0.0.1:7890/
+  ProxyPassReverse / http://127.0.0.1:7890/
+  RequestHeader set X-Forwarded-Proto "https"
+</VirtualHost>
+```
 
-Pages: `/` is the campaign; `/thanks` is the thank-you page.
+### Traefik (Docker label sketch)
 
-## Implementation notes
+If the app container is on a Traefik network, point a router at the service on port `7890` (TLS via your usual Traefik cert resolver). Still keep PocketBase published only on `127.0.0.1:5789` — do not attach a public Traefik router to the CMS.
 
-- **GiroCode / EPC069-12:** version `002`, charset `2` (ISO-8859-1), BIC included, remittance from `CAMPAIGN_REMITTANCE`. QR error correction **M** via `uqr`.
-- **VoP:** Banks may check name vs IBAN. Wrong `PAYEE_NAME` does not stop the transfer but scares donors.
-- **PayPal.Me:** outbound link only, no JS SDK. Prefer friends-and-family in EUR from balance or linked bank on a personal account.
-- **Languages:** DE / EN / PT / ES. Footer keeps **Impressum** and **Datenschutz** as two links.
+## Notes
+
+- **GiroCode / EPC069-12:** EUR only; version `002`, charset `2`, BIC included, remittance from `CAMPAIGN_REMITTANCE`.
+- **VoP:** Wrong `PAYEE_NAME` does not stop the transfer but scares donors.
+- **PayPal.Me:** outbound link only; amount + `DONATION_CURRENCY` appended at runtime.
+- **Languages:** DE / EN / PT / ES.
 
 ## Versioning & releases
 
-Source of truth for the template version is `package.json` `"version"`. Git tags are `v` plus that version (e.g. `v0.1.0`). See [CHANGELOG.md](CHANGELOG.md).
+Version lives in `package.json`. Tags are `v` + that version. See [CHANGELOG.md](CHANGELOG.md).
 
-Pushes and pull requests to `main` run the CI workflow (unit tests and production build).
-
-Bump meaning for this template:
-
-- **MAJOR** — breaking for operators/forks (env vars removed or renamed, seed/schema contract, required PocketBase major, incompatible build/runtime).
+- **MAJOR** — breaking for operators/forks (env, seed/schema, PocketBase major).
 - **MINOR** — backward-compatible features.
-- **PATCH** — fixes, docs, or chore with no contract break.
+- **PATCH** — fixes, docs, chore.
 
-Call out PocketBase pin changes (`PB_VERSION` / `scripts/fetch-pocketbase.mjs`) and schema or env changes in the changelog when they matter to adopters.
-
-To cut a release:
-
-1. Bump `version` in `package.json` (and the matching fields in `package-lock.json`).
-2. Move items from `[Unreleased]` in `CHANGELOG.md` into a dated `## [X.Y.Z]` section.
-3. Commit, then `git tag vX.Y.Z` and `git push && git push --tags`.
-4. Pushing the tag runs the release workflow, which creates a GitHub Release from that changelog section (and fails if the tag does not match `package.json`).
+CI runs tests and production build on `main`. Tag push creates a GitHub Release from the matching changelog section.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Please follow the [Code of Conduct](CODE_OF_CONDUCT.md). To report a vulnerability, use [SECURITY.md](SECURITY.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). Vulnerabilities: [SECURITY.md](SECURITY.md).
 
 ## License
 
 - Software and demo content: [MIT](LICENSE)
 - Fraunces font: SIL OFL, see [NOTICE](NOTICE)
+
+---
+
+Created by [Kite-Engineer](https://www.kite-engineer.de) (Stefan Merthan).

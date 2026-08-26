@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-import { CAMPAIGN_NAME } from "./config";
+import { CAMPAIGN_NAME, DONATION_CURRENCY, LOCAL_CURRENCY } from "./config";
 import { copyFor, isLang, type Copy, type Lang } from "./i18n";
 import { loadAllCopies } from "./i18n/loadCopy";
 import {
@@ -9,6 +9,7 @@ import {
   type Campaign,
 } from "./live";
 import { enhanceImages, setupLightbox, wrapZoomable } from "./lightbox";
+import { formatMoney } from "./money";
 
 const STORAGE_KEY = "pfc-lang";
 
@@ -66,26 +67,6 @@ function applyCopy(copy: Copy): void {
   });
 }
 
-function localeFor(lang: Lang): string {
-  return lang === "de" ? "de-DE" : lang === "pt" ? "pt-BR" : lang === "es" ? "es-ES" : "en-US";
-}
-
-function formatEur(amount: number, lang: Lang): string {
-  return new Intl.NumberFormat(localeFor(lang), {
-    style: "currency",
-    currency: "EUR",
-  }).format(amount);
-}
-
-function formatCop(amount: number, lang: Lang): string {
-  return new Intl.NumberFormat(localeFor(lang), {
-    style: "currency",
-    currency: "COP",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(amount);
-}
-
 const state = {
   lang: readLang(),
   campaign: null as Campaign | null,
@@ -99,13 +80,22 @@ function currentCopy(): Copy {
 function renderThanks(): void {
   const copy = currentCopy();
   const campaign = state.campaign;
-  const eurEl = document.querySelector("#collected-eur");
-  const copEl = document.querySelector("#collected-cop");
+  const primaryEl = document.querySelector("#collected-primary");
+  const localEl = document.querySelector("#collected-local");
+  const localFigure = document.querySelector("#thanks-local");
   const gallery = document.querySelector("#thanks-gallery");
-  if (!campaign || !eurEl || !copEl || !gallery) return;
+  if (!campaign || !primaryEl || !gallery) return;
 
-  eurEl.textContent = formatEur(campaign.collectedEur, state.lang);
-  copEl.textContent = formatCop(campaign.amountPesos, state.lang);
+  primaryEl.textContent = formatMoney(campaign.collected, DONATION_CURRENCY, state.lang);
+
+  if (localEl && localFigure) {
+    if (LOCAL_CURRENCY) {
+      localFigure.removeAttribute("hidden");
+      localEl.textContent = formatMoney(campaign.amountLocal, LOCAL_CURRENCY, state.lang);
+    } else {
+      localFigure.setAttribute("hidden", "");
+    }
+  }
 
   const proofs = donationsWithImages(campaign.donations);
   if (proofs.length === 0) {

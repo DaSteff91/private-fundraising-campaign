@@ -129,8 +129,8 @@ export const es: Copy = {
   thanks: {
     title: "GRACIAS",
     lead: "La recaudación ha cerrado. Juntos reunimos un importe que ya se ha reenviado.",
-    eurLabel: "recaudado en euro",
-    copLabel: "reenviado (moneda local)",
+    collectedLabel: "recaudado",
+    localLabel: "reenviado (moneda local)",
     toCampaign: "Ver la página de la campaña",
     backHome: "Volver al agradecimiento",
     proofsTitle: "Comprobantes",

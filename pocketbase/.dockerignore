@@ -1,1 +1,1 @@
-# binary supplied by npm run pb:fetch
+# binary for Path B (npm run pb:fetch / setup). Path A downloads inside the Docker image.

@@ -1,10 +1,19 @@
 // SPDX-License-Identifier: MIT
-import { AMOUNT_PRESETS, CAMPAIGN_REMITTANCE, PAYEE, PAYPAL_ME_HANDLE, WISE_REQUEST_URL } from "./config";
+import {
+  AMOUNT_PRESETS,
+  CAMPAIGN_REMITTANCE,
+  DONATION_CURRENCY,
+  GIROCODE_AVAILABLE,
+  PAYEE,
+  PAYPAL_ME_HANDLE,
+  WISE_REQUEST_URL,
+} from "./config";
 import { copyFor, isLang, type Copy, type Lang } from "./i18n";
 import { loadAllCopies } from "./i18n/loadCopy";
 import { captionFor, loadCampaign, type Campaign } from "./live";
 import { renderGallery } from "./gallery";
 import { enhanceImages, setupLightbox, wrapZoomable } from "./lightbox";
+import { formatMoney, formatPresetLabel } from "./money";
 import { buildEpcPayload, formatAmount } from "./payment/epc";
 import { paypalMeUrl } from "./payment/paypal";
 import { girocodeSvg } from "./payment/qr";
@@ -81,12 +90,8 @@ function applyCopy(copy: Copy): void {
   });
 }
 
-function formatEur(amount: number, lang: Lang): string {
-  const locale =
-    lang === "de" ? "de-DE" : lang === "pt" ? "pt-BR" : lang === "es" ? "es-ES" : "en-US";
-  return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(
-    amount,
-  );
+function formatDonation(amount: number, lang: Lang): string {
+  return formatMoney(amount, DONATION_CURRENCY, lang);
 }
 
 function formatIban(iban: string): string {
@@ -132,6 +137,10 @@ async function copyText(value: string): Promise<boolean> {
 function renderQr(amount: number): void {
   const host = document.querySelector("#qr");
   if (!(host instanceof HTMLElement)) return;
+  if (!GIROCODE_AVAILABLE) {
+    host.replaceChildren();
+    return;
+  }
   try {
     const payload = buildEpcPayload({
       bic: PAYEE.bic,
@@ -185,11 +194,11 @@ function syncAmountUi(): void {
     btn.setAttribute("aria-pressed", String(value === state.amount));
   });
   const amountEl = document.querySelector("#field-amount");
-  if (amountEl) amountEl.textContent = formatEur(state.amount, state.lang);
+  if (amountEl) amountEl.textContent = formatDonation(state.amount, state.lang);
   renderQr(state.amount);
   const paypal = document.querySelector(".paypal-btn");
   if (paypal instanceof HTMLAnchorElement) {
-    paypal.href = paypalMeUrl(PAYPAL_ME_HANDLE, state.amount);
+    paypal.href = paypalMeUrl(PAYPAL_ME_HANDLE, state.amount, DONATION_CURRENCY);
   }
   const custom = document.querySelector("#amount-custom");
   if (custom instanceof HTMLInputElement && Number(custom.value) !== state.amount) {
@@ -208,13 +217,13 @@ function renderProgress(): void {
   const list = document.querySelector("#updates");
   if (!campaign || !collected || !phase || !updated || !list) return;
 
-  collected.textContent = formatEur(campaign.collectedEur, state.lang);
+  collected.textContent = formatDonation(campaign.collected, state.lang);
   phase.textContent = copy.progress.phases[campaign.phase];
   updated.textContent = state.live
     ? `${copy.progress.updated}: ${formatDay(campaign.updatedAt, state.lang)}`
     : copy.progress.unknown;
 
-  const items = campaign.donations.filter((row) => row.amountEur > 0 || Boolean(row.image));
+  const items = campaign.donations.filter((row) => row.amount > 0 || Boolean(row.image));
   if (items.length === 0) {
     const empty = document.createElement("li");
     empty.textContent = copy.progress.empty;
@@ -225,18 +234,18 @@ function renderProgress(): void {
         const li = document.createElement("li");
         const figure = document.createElement("figure");
         const captionText = captionFor(row.caption, state.lang);
-        const amount = formatEur(row.amountEur, state.lang);
+        const amount = formatDonation(row.amount, state.lang);
         const day = formatDay(row.date, state.lang);
         if (row.image) {
           const img = document.createElement("img");
           img.src = row.image;
-          img.alt = captionText || (row.amountEur > 0 ? `${amount}, ${day}` : day);
+          img.alt = captionText || (row.amount > 0 ? `${amount}, ${day}` : day);
           figure.append(wrapZoomable(img, row.image, copy));
         } else {
           figure.classList.add("is-text-only");
         }
         const cap = document.createElement("figcaption");
-        if (row.amountEur > 0) {
+        if (row.amount > 0) {
           cap.textContent = captionText
             ? `${day} — ${amount} · ${captionText}`
             : `${day} — ${amount}`;
@@ -288,7 +297,7 @@ function setupAmounts(): void {
       const button = document.createElement("button");
       button.type = "button";
       button.dataset.amount = String(value);
-      button.textContent = `${value} €`;
+      button.textContent = formatPresetLabel(value, DONATION_CURRENCY, state.lang);
       button.addEventListener("click", () => {
         state.amount = value;
         const custom = document.querySelector("#amount-custom");
@@ -326,21 +335,33 @@ function setupMethods(): void {
   const tabs = [...document.querySelectorAll<HTMLButtonElement>(".method-tab")];
   if (tabs.length === 0) return;
 
+  const bankTab = document.querySelector("#tab-bank");
+  const bankPanel = document.querySelector("#panel-bank");
+  if (!GIROCODE_AVAILABLE) {
+    bankTab?.setAttribute("hidden", "");
+    bankPanel?.setAttribute("hidden", "");
+    if (state.method === "bank") state.method = "paypal";
+  }
+
   const select = (method: string): void => {
     if (method !== "paypal" && method !== "bank" && method !== "wise") return;
+    if (method === "bank" && !GIROCODE_AVAILABLE) return;
     state.method = method;
     syncMethodUi();
   };
 
-  tabs.forEach((tab, index) => {
+  tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       select(tab.dataset.method ?? "");
     });
     tab.addEventListener("keydown", (event) => {
       if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
       event.preventDefault();
+      const visible = tabs.filter((t) => !t.hasAttribute("hidden"));
+      const current = visible.indexOf(tab);
+      if (current < 0) return;
       const delta = event.key === "ArrowRight" ? 1 : -1;
-      const next = tabs[(index + delta + tabs.length) % tabs.length];
+      const next = visible[(current + delta + visible.length) % visible.length];
       next?.focus();
       select(next?.dataset.method ?? "");
     });

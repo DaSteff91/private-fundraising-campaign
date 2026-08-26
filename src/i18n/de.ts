@@ -129,8 +129,8 @@ export const de: Copy = {
   thanks: {
     title: "DANKE",
     lead: "Die Sammlung ist abgeschlossen. Gemeinsam ist ein Betrag zusammengekommen, der weitergeleitet wurde.",
-    eurLabel: "gesammelt in Euro",
-    copLabel: "weitergeleitet (Lokalwährung)",
+    collectedLabel: "gesammelt",
+    localLabel: "weitergeleitet (Lokalwährung)",
     toCampaign: "Zur Kampagnenseite",
     backHome: "Zur Danke-Seite",
     proofsTitle: "Nachweise",

@@ -22,6 +22,7 @@ const REQUIRED = [
 ] as const;
 
 const DEFAULT_POCKETBASE_URL = "http://127.0.0.1:5789";
+const ISO4217 = /^[A-Z]{3}$/;
 
 function collectEnv(mode: string): Record<string, string> {
   const loaded = loadEnv(mode, process.cwd(), "");
@@ -34,6 +35,10 @@ function collectEnv(mode: string): Record<string, string> {
     loaded.POCKETBASE_URL === undefined
       ? DEFAULT_POCKETBASE_URL
       : loaded.POCKETBASE_URL.trim().replace(/\/$/, "");
+  const donation = (loaded.DONATION_CURRENCY ?? "EUR").trim().toUpperCase() || "EUR";
+  env.DONATION_CURRENCY = ISO4217.test(donation) ? donation : "EUR";
+  const local = (loaded.LOCAL_CURRENCY ?? "").trim().toUpperCase();
+  env.LOCAL_CURRENCY = ISO4217.test(local) ? local : "";
   return env;
 }
 
@@ -52,6 +57,9 @@ function assertComplete(env: Record<string, string>, command: string): void {
     paypalMeHandle(env.PAYPAL_ME_HANDLE);
   } catch {
     throw new Error("PAYPAL_ME_HANDLE must be a PayPal.Me handle or paypal.me URL");
+  }
+  if (!ISO4217.test(env.DONATION_CURRENCY)) {
+    throw new Error("DONATION_CURRENCY must be a 3-letter ISO 4217 code");
   }
 }
 
@@ -163,6 +171,8 @@ export default defineConfig(({ command, mode }) => {
       __POCKETBASE_URL__: JSON.stringify(env.POCKETBASE_URL),
       __CAMPAIGN_NAME__: JSON.stringify(env.CAMPAIGN_NAME),
       __CAMPAIGN_REMITTANCE__: JSON.stringify(env.CAMPAIGN_REMITTANCE),
+      __DONATION_CURRENCY__: JSON.stringify(env.DONATION_CURRENCY),
+      __LOCAL_CURRENCY__: JSON.stringify(env.LOCAL_CURRENCY),
     },
   };
 });

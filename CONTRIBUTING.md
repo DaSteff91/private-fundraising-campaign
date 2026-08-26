@@ -2,6 +2,8 @@
 
 Thanks for helping improve this template. By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
+Coding agents: start with [AGENTS.md](AGENTS.md) for env, CMS, and currency invariants.
+
 ## Prerequisites
 
 - Node.js ≥ 20

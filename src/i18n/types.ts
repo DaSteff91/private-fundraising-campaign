@@ -72,8 +72,8 @@ export type Copy = {
   thanks: {
     title: string;
     lead: string;
-    eurLabel: string;
-    copLabel: string;
+    collectedLabel: string;
+    localLabel: string;
     toCampaign: string;
     backHome: string;
     proofsTitle: string;

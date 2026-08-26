@@ -18,6 +18,12 @@ export const SITE_URL = __SITE_URL__;
 export const POCKETBASE_URL = __POCKETBASE_URL__;
 export const CAMPAIGN_NAME = __CAMPAIGN_NAME__;
 export const CAMPAIGN_REMITTANCE = __CAMPAIGN_REMITTANCE__;
+/** ISO 4217 — donation amounts, PayPal.Me suffix, UI formatting. */
+export const DONATION_CURRENCY = __DONATION_CURRENCY__;
+/** ISO 4217 or "" — thank-you local/forwarded total; empty hides that figure. */
+export const LOCAL_CURRENCY = __LOCAL_CURRENCY__;
+/** SEPA GiroCode / EPC069-12 only supports EUR. */
+export const GIROCODE_AVAILABLE = DONATION_CURRENCY === "EUR";
 
 export const AMOUNT_PRESETS = [10, 25, 50] as const;
 /** Fallback close date when PocketBase settings are unavailable. */

@@ -27,16 +27,25 @@ if (fetch.status !== 0) {
 }
 
 console.log(`
-Next steps:
-  1. Edit .env (PAYEE_*, OPERATOR_*, CAMPAIGN_*, PayPal / Wise).
-  2. Apply schema migrations, then start PocketBase:
-       npm run pb:migrate
-       ./pocketbase/bin/pocketbase serve --http=127.0.0.1:5789 --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations --automigrate=false
-  3. Create a superuser (other terminal):
-       ./pocketbase/bin/pocketbase superuser upsert you@example.test 'your-password' --dir=./pb_data
-  4. Seed demo copy + donations:
-       npm run seed:pb:copy
-       PB_ADMIN_EMAIL=you@example.test PB_ADMIN_PASSWORD='your-password' npm run seed:pb
-  5. Run the app:
-       npm run dev
+Next steps (Path B — local):
+  1. Edit .env if you are not using the demo placeholders
+       (PAYEE_*, OPERATOR_*, CAMPAIGN_*, DONATION_CURRENCY, PayPal / Wise).
+  2. npm run pb:migrate
+  3. Terminal A: npm run pb:serve
+  4. Terminal B:
+       npm run pb:superuser
+       npm run demo:seed
+  5. npm run dev
+       → http://127.0.0.1:7890
+
+Or Path A (Docker), after editing .env:
+  npm run demo:docker
+  then npm run pb:superuser && npm run demo:seed
+  → http://127.0.0.1:7890
+
+Demo admin (local try-out only — change before go-live):
+  email    demo@example.test
+  password demopassword-change-me
+
+Agents: see AGENTS.md
 `);

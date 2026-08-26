@@ -6,15 +6,15 @@ export type LocalizedCaption = { de: string; en: string; pt: string; es: string 
 
 export type Donation = {
   date: string;
-  amountEur: number;
+  amount: number;
   image?: string;
   caption?: LocalizedCaption;
 };
 
 export type Campaign = {
   updatedAt: string;
-  collectedEur: number;
-  amountPesos: number;
+  collected: number;
+  amountLocal: number;
   phase: CampaignPhase;
   closeDate: string;
   donations: Donation[];
@@ -22,8 +22,8 @@ export type Campaign = {
 
 export const FALLBACK_CAMPAIGN: Campaign = {
   updatedAt: "2026-08-14",
-  collectedEur: 0,
-  amountPesos: 0,
+  collected: 0,
+  amountLocal: 0,
   phase: "collecting",
   closeDate: CLOSE_DATE_ISO,
   donations: [],
@@ -45,7 +45,7 @@ type PbSettings = {
   closeDate?: unknown;
   phase?: unknown;
   updatedAt?: unknown;
-  amountPesos?: unknown;
+  amountLocal?: unknown;
 };
 
 type PbDonation = {
@@ -53,7 +53,7 @@ type PbDonation = {
   collectionId?: string;
   collectionName?: string;
   date?: unknown;
-  amountEur?: unknown;
+  amount?: unknown;
   image?: unknown;
   captionDe?: unknown;
   captionEn?: unknown;
@@ -84,7 +84,7 @@ export function captionFor(caption: LocalizedCaption | undefined, lang: Lang): s
 }
 
 export function sumDonations(donations: Donation[]): number {
-  return donations.reduce((cents, row) => cents + Math.round(row.amountEur * 100), 0) / 100;
+  return donations.reduce((cents, row) => cents + Math.round(row.amount * 100), 0) / 100;
 }
 
 /** Donations that carry a proof/status image (thank-you gallery). */
@@ -92,12 +92,12 @@ export function donationsWithImages(donations: Donation[]): Donation[] {
   return donations.filter((row) => Boolean(row.image));
 }
 
-function parseAmountPesos(value: unknown): number {
+function parseAmountLocal(value: unknown): number {
   if (typeof value === "number" && Number.isFinite(value) && value >= 0) return value;
   return 0;
 }
 
-function parseAmountEur(value: unknown): number | null {
+function parseAmount(value: unknown): number | null {
   if (typeof value === "number" && Number.isFinite(value) && value >= 0) return value;
   // PocketBase may omit 0 when the field is optional / "blank".
   if (value === null || value === undefined || value === "") return 0;
@@ -108,12 +108,13 @@ function parseDonation(value: unknown): Donation | null {
   if (typeof value !== "object" || value === null) return null;
   const row = value as Record<string, unknown>;
   if (typeof row.date !== "string" || !DATE_ISO.test(row.date)) return null;
-  const amountEur = parseAmountEur(row.amountEur);
-  if (amountEur === null) return null;
+  const rawAmount = row.amount !== undefined ? row.amount : row.amountEur;
+  const amount = parseAmount(rawAmount);
+  if (amount === null) return null;
 
   const donation: Donation = {
     date: row.date,
-    amountEur,
+    amount,
   };
 
   if (typeof row.image === "string" && row.image.trim()) {
@@ -147,10 +148,13 @@ export function parseCampaign(data: unknown): Campaign | null {
       ? row.closeDate
       : CLOSE_DATE_ISO;
 
+  const amountLocalRaw =
+    row.amountLocal !== undefined ? row.amountLocal : row.amountPesos;
+
   return {
     updatedAt: row.updatedAt,
-    collectedEur: sumDonations(donations),
-    amountPesos: parseAmountPesos(row.amountPesos),
+    collected: sumDonations(donations),
+    amountLocal: parseAmountLocal(amountLocalRaw),
     phase: row.phase as CampaignPhase,
     closeDate,
     donations,
@@ -178,7 +182,7 @@ function mapPbDonation(row: PbDonation): Donation | null {
 
   return parseDonation({
     date: row.date,
-    amountEur: row.amountEur,
+    amount: row.amount,
     image: imageName ? fileUrl(row, imageName) : undefined,
     caption,
   });
@@ -190,7 +194,7 @@ function mapPbSettings(row: PbSettings | undefined, donations: Donation[]): Camp
     updatedAt: row.updatedAt,
     phase: row.phase,
     closeDate: row.closeDate,
-    amountPesos: row.amountPesos,
+    amountLocal: row.amountLocal,
     donations,
   });
 }

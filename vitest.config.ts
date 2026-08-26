@@ -39,6 +39,16 @@ export default defineConfig(({ mode }) => {
       ),
       __CAMPAIGN_NAME__: JSON.stringify(env.CAMPAIGN_NAME || "Sam's Workshop"),
       __CAMPAIGN_REMITTANCE__: JSON.stringify(env.CAMPAIGN_REMITTANCE || "Sams Workshop"),
+      __DONATION_CURRENCY__: JSON.stringify(
+        /^[A-Z]{3}$/.test((env.DONATION_CURRENCY || "EUR").trim().toUpperCase())
+          ? (env.DONATION_CURRENCY || "EUR").trim().toUpperCase()
+          : "EUR",
+      ),
+      __LOCAL_CURRENCY__: JSON.stringify(
+        /^[A-Z]{3}$/.test((env.LOCAL_CURRENCY || "").trim().toUpperCase())
+          ? (env.LOCAL_CURRENCY || "").trim().toUpperCase()
+          : "",
+      ),
     },
   };
 });

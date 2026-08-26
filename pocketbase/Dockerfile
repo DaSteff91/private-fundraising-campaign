@@ -1,11 +1,17 @@
 # SPDX-License-Identifier: MIT
-# Build after: npm run pb:fetch
+# Downloads pinned PocketBase at build time (no host pocketbase/bin required).
 FROM alpine:3.21
 
-RUN apk add --no-cache ca-certificates wget
+ARG PB_VERSION=0.40.1
+ARG PB_TARGET=linux_amd64
 
-COPY bin/pocketbase /pb/pocketbase
-RUN chmod +x /pb/pocketbase
+RUN apk add --no-cache ca-certificates wget unzip \
+  && wget -q -O /tmp/pb.zip \
+    "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_${PB_TARGET}.zip" \
+  && unzip -o /tmp/pb.zip pocketbase -d /pb \
+  && chmod +x /pb/pocketbase \
+  && rm /tmp/pb.zip \
+  && apk del unzip
 
 WORKDIR /pb
 EXPOSE 8090

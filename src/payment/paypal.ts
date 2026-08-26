@@ -4,6 +4,7 @@
 import { formatAmount } from "./epc";
 
 const HANDLE = /^[A-Za-z0-9]{1,20}$/;
+const ISO4217 = /^[A-Z]{3}$/;
 
 /** Strip a handle or a pasted paypal.me / paypal.com/paypalme URL to the handle. */
 export function paypalMeHandle(raw: string): string {
@@ -26,6 +27,12 @@ export function paypalMeBaseUrl(handleOrUrl: string): string {
   return `https://www.paypal.com/paypalme/${paypalMeHandle(handleOrUrl)}`;
 }
 
-export function paypalMeUrl(handleOrUrl: string, amountEur: number): string {
-  return `${paypalMeBaseUrl(handleOrUrl)}/${formatAmount(amountEur)}EUR`;
+export function paypalMeUrl(
+  handleOrUrl: string,
+  amount: number,
+  currency = "EUR",
+): string {
+  const code = currency.trim().toUpperCase();
+  if (!ISO4217.test(code)) throw new Error("Invalid donation currency");
+  return `${paypalMeBaseUrl(handleOrUrl)}/${formatAmount(amount)}${code}`;
 }

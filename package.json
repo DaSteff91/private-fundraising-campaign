@@ -5,6 +5,14 @@
   "description": "Open-source template for a private (non-charity) fundraising landing page with SEPA QR, PayPal.Me, Wise, and PocketBase CMS.",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaSteff91/private-fundraising-campaign.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DaSteff91/private-fundraising-campaign/issues"
+  },
+  "homepage": "https://github.com/DaSteff91/private-fundraising-campaign#readme",
   "scripts": {
     "setup": "node scripts/setup.mjs",
     "dev": "vite",
@@ -14,8 +22,12 @@
     "test:watch": "vitest",
     "seed:pb:copy": "npx vite-node scripts/build-copy-seed.ts",
     "seed:pb": "node scripts/seed-pocketbase.mjs",
+    "demo:seed": "node scripts/demo-seed.mjs",
+    "demo:docker": "node scripts/demo-docker.mjs",
     "pb:fetch": "node scripts/fetch-pocketbase.mjs",
-    "pb:migrate": "./pocketbase/bin/pocketbase migrate up --dir=./pb_data --migrationsDir=./pocketbase/pb_migrations"
+    "pb:migrate": "node scripts/pb-migrate.mjs",
+    "pb:serve": "node scripts/pb-serve.mjs",
+    "pb:superuser": "node scripts/pb-superuser.mjs"
   },
   "engines": {
     "node": ">=20"

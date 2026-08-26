@@ -26,7 +26,7 @@ migrate(
             values: phases,
           },
           { name: "updatedAt", type: "text", required: true },
-          { name: "amountPesos", type: "number", required: false },
+          { name: "amountLocal", type: "number", required: false },
         ],
       }),
     );
@@ -43,7 +43,7 @@ migrate(
         fields: [
           { name: "date", type: "text", required: true },
           // Not required: PocketBase treats 0 as blank when required is true.
-          { name: "amountEur", type: "number", required: false },
+          { name: "amount", type: "number", required: false },
           {
             name: "image",
             type: "file",

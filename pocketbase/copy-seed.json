@@ -122,8 +122,8 @@
     "thanks": {
       "title": "DANKE",
       "lead": "Die Sammlung ist abgeschlossen. Gemeinsam ist ein Betrag zusammengekommen, der weitergeleitet wurde.",
-      "eurLabel": "gesammelt in Euro",
-      "copLabel": "weitergeleitet (Lokalwährung)",
+      "collectedLabel": "gesammelt",
+      "localLabel": "weitergeleitet (Lokalwährung)",
       "toCampaign": "Zur Kampagnenseite",
       "backHome": "Zur Danke-Seite",
       "proofsTitle": "Nachweise"
@@ -252,8 +252,8 @@
     "thanks": {
       "title": "THANK YOU",
       "lead": "The collection has closed. Together we raised an amount that has now been forwarded.",
-      "eurLabel": "collected in euro",
-      "copLabel": "forwarded (local currency)",
+      "collectedLabel": "collected",
+      "localLabel": "forwarded (local currency)",
       "toCampaign": "Visit the campaign page",
       "backHome": "Back to thank-you",
       "proofsTitle": "Proof"
@@ -382,8 +382,8 @@
     "thanks": {
       "title": "OBRIGADO",
       "lead": "A arrecadação terminou. Juntos reunimos um valor que já foi repassado.",
-      "eurLabel": "arrecadado em euro",
-      "copLabel": "repassado (moeda local)",
+      "collectedLabel": "arrecadado",
+      "localLabel": "repassado (moeda local)",
       "toCampaign": "Ver a página da campanha",
       "backHome": "Voltar ao agradecimento",
       "proofsTitle": "Comprovantes"
@@ -512,8 +512,8 @@
     "thanks": {
       "title": "GRACIAS",
       "lead": "La recaudación ha cerrado. Juntos reunimos un importe que ya se ha reenviado.",
-      "eurLabel": "recaudado en euro",
-      "copLabel": "reenviado (moneda local)",
+      "collectedLabel": "recaudado",
+      "localLabel": "reenviado (moneda local)",
       "toCampaign": "Ver la página de la campaña",
       "backHome": "Volver al agradecimiento",
       "proofsTitle": "Comprobantes"

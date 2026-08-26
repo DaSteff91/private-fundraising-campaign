@@ -2,11 +2,11 @@
   "updatedAt": "2026-08-20",
   "phase": "collecting",
   "closeDate": "2026-12-31",
-  "amountPesos": 0,
+  "amountLocal": 0,
   "donations": [
-    { "date": "2026-08-15", "amountEur": 25 },
-    { "date": "2026-08-16", "amountEur": 10 },
-    { "date": "2026-08-18", "amountEur": 50 },
-    { "date": "2026-08-19", "amountEur": 5 }
+    { "date": "2026-08-15", "amount": 25 },
+    { "date": "2026-08-16", "amount": 10 },
+    { "date": "2026-08-18", "amount": 50 },
+    { "date": "2026-08-19", "amount": 5 }
   ]
 }
